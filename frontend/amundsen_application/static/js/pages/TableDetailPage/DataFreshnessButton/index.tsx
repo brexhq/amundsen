@@ -3,12 +3,18 @@
 
 import * as React from 'react';
 import { Modal, OverlayTrigger, Popover } from 'react-bootstrap';
+import Linkify from 'react-linkify';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { getFreshnessData } from 'ducks/tableMetadata/reducer';
 import { GlobalState } from 'ducks/rootReducer';
-import { PreviewData, TablePreviewQueryParams, TableMetadata } from 'interfaces';
+import { PreviewDataTable } from 'features/PreviewData';
+import {
+  PreviewData,
+  TablePreviewQueryParams,
+  TableMetadata,
+} from 'interfaces';
 import { logClick } from 'utils/analytics';
 
 enum FetchingStatus {
@@ -88,54 +94,17 @@ export class DataFreshnessButton extends React.Component<
     this.setState({ showModal: true });
   };
 
-  getSanitizedValue(value) {
-    // Display the string interpretation of the following "false-y" values
-    // return 'Data Exceeds Render Limit' msg if column is too long
-    let sanitizedValue = '';
-    if (value === 0 || typeof value === 'boolean') {
-      sanitizedValue = value.toString();
-    } else if (typeof value === 'object') {
-      sanitizedValue = JSON.stringify(value);
-    } else {
-      sanitizedValue = value;
-    }
-    return sanitizedValue;
-  }
-
   renderModalBody() {
     const { freshnessData } = this.props;
 
     if (this.props.status === FetchingStatus.SUCCESS) {
-      if (
-        !freshnessData.columns ||
-        !freshnessData.data ||
-        freshnessData.columns.length === 0 ||
-        freshnessData.data.length === 0
-      ) {
-        return <div>No freshness data available</div>;
-      }
+      return <PreviewDataTable isLoading={false} previewData={freshnessData} />;
+    }
 
+    if (this.props.status === FetchingStatus.ERROR) {
       return (
-        <div className="grid">
-          {freshnessData.columns.map((col, colId) => {
-            const fieldName = col.column_name;
-            return (
-              <div key={fieldName} id={fieldName} className="grid-column">
-                <div className="grid-cell grid-header subtitle-3">
-                  {fieldName.toUpperCase()}
-                </div>
-                {(freshnessData.data || []).map((row, rowId) => {
-                  const cellId = `${colId}:${rowId}`;
-                  const dataItemValue = this.getSanitizedValue(row[fieldName]);
-                  return (
-                    <div key={cellId} className="grid-cell">
-                      {dataItemValue}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
+        <div>
+          <Linkify>{freshnessData.error_text}</Linkify>
         </div>
       );
     }

@@ -141,47 +141,10 @@ def _get_table_metadata(*, table_key: str, index: int, source: str) -> Dict[str,
         'msg': '',
     }
 
-    from amundsen_common.models.table import (Application, Badge, Column,
-                                              ProgrammaticDescription, Source,
-                                              Stat, Table, Tag, User, Watermark, TableSchema)
-    example_table = Table(database='hive', cluster='gold', schema='foo_schema', name='foo_table',
-                          tags=[Tag(tag_name='test', tag_type='default')],
-                          badges=[Badge(badge_name='golden', category='table_status')],
-                          table_readers=[], description='foo description',
-                          watermarks=[Watermark(watermark_type='high_watermark',
-                                                partition_key='ds',
-                                                partition_value='fake_value',
-                                                create_time='fake_time'),
-                                      Watermark(watermark_type='low_watermark',
-                                                partition_key='ds',
-                                                partition_value='fake_value',
-                                                create_time='fake_time')],
-                          columns=[Column(name='bar_id_1', description='bar col description', col_type='varchar',
-                                          sort_order=0, stats=[Stat(start_epoch=1,
-                                                                    end_epoch=1,
-                                                                    stat_type='avg',
-                                                                    stat_val='1')], badges=[]),
-                                   Column(name='bar_id_2', description='bar col2 description', col_type='bigint',
-                                          sort_order=1, stats=[Stat(start_epoch=2,
-                                                                    end_epoch=2,
-                                                                    stat_type='avg',
-                                                                    stat_val='2')],
-                                          badges=[Badge(badge_name='primary key', category='column')])],
-                          owners=[User(email='tester@example.com')],
-                          last_updated_timestamp=1,
-                          source=Source(source='/source_file_loc',
-                                        source_type='github'),
-                          is_view=False,
-                          programmatic_descriptions=[
-                              ProgrammaticDescription(source='quality_report',
-                                                      text='Test Test'),
-                              ProgrammaticDescription(source='s3_crawler',
-                                                      text='Test Test Test')
-                          ])
-
     try:
         table_endpoint = _get_table_endpoint()
         url = '{0}/{1}'.format(table_endpoint, table_key)
+        response = request_metadata(url=url)
     except ValueError as e:
         # envoy client BadResponse is a subclass of ValueError
         message = 'Encountered exception: ' + str(e)
@@ -190,7 +153,7 @@ def _get_table_metadata(*, table_key: str, index: int, source: str) -> Dict[str,
         logging.exception(message)
         return results_dict
 
-    status_code = 200
+    status_code = response.status_code
     results_dict['status_code'] = status_code
 
     if status_code != HTTPStatus.OK:
@@ -200,8 +163,7 @@ def _get_table_metadata(*, table_key: str, index: int, source: str) -> Dict[str,
         return results_dict
 
     try:
-        schema = TableSchema()
-        table_data_raw: dict = schema.dump(example_table)
+        table_data_raw: dict = response.json()
 
         # Ideally the response should include 'key' to begin with
         table_data_raw['key'] = table_key

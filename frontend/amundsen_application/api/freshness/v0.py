@@ -5,7 +5,7 @@ import logging
 
 from http import HTTPStatus
 
-from flask import Response, jsonify, make_response, request
+from flask import Response, jsonify, make_response
 from flask.blueprints import Blueprint
 
 from amundsen_application.models.preview_data import (
