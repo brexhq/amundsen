@@ -21,6 +21,7 @@ freshness_blueprint = Blueprint('freshness', __name__, url_prefix='/api/freshnes
 
 @freshness_blueprint.route('/', methods=['POST'])
 def get_table_freshness() -> Response:
+    # fake data to test out functionality
     columns = [
         ColumnItem(column_name='latest updated_at', column_type=""),
         ColumnItem(column_name='latest inserted_at', column_type=""),
