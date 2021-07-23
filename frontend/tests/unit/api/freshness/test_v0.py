@@ -27,7 +27,7 @@ class DataFreshnessClient(BaseDataFreshnessClient):
 class DataFreshnessTest(unittest.TestCase):
 
     def setUp(self) -> None:
-        local_app.config['PREVIEW_CLIENT_ENABLED'] = True
+        local_app.config['DATA_FRESHNESS_CLIENT_ENABLED'] = True
 
     def test_no_client_class(self) -> None:
         """
