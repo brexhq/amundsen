@@ -57,7 +57,6 @@ class DataFreshnessTest(unittest.TestCase):
         local_app.config['DATA_FRESHNESS_CLIENT'] = DATA_FRESHNESS_CLIENT
 
         expected_response_json = {
-            'msg': 'Success',
             'freshnessData': {
                 'columns': [{}],
                 'data': [{'latest updated_at': '2021-07-14 13:52:51.807 +0000'}]}
