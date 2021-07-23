@@ -13,7 +13,7 @@ from amundsen_application.api.freshness import v0
 from amundsen_application.base.base_data_freshness_client import BaseDataFreshnessClient
 
 local_app = create_app('amundsen_application.config.TestConfig', 'tests/templates')
-DATA_FRESHNESS_CLIENT_CLASS = 'tests.unit.api.freshness.test_v0.DataFreshnessClient'
+DATA_FRESHNESS_CLIENT = 'tests.unit.api.freshness.test_v0.DataFreshnessClient'
 
 
 class DataFreshnessClient(BaseDataFreshnessClient):
@@ -44,7 +44,7 @@ class DataFreshnessTest(unittest.TestCase):
             response = test.post('/api/freshness/v0/')
             self.assertEqual(response.status_code, HTTPStatus.NOT_IMPLEMENTED)
 
-    @unittest.mock.patch(DATA_FRESHNESS_CLIENT_CLASS + '.get_freshness_data')
+    @unittest.mock.patch(DATA_FRESHNESS_CLIENT + '.get_freshness_data')
     def test_good_client_response(self, mock_get_freshness_data: unittest.mock.Mock) -> None:
         """
         Test response
@@ -56,7 +56,7 @@ class DataFreshnessTest(unittest.TestCase):
                 'data': [{'latest updated_at': '2021-07-14 13:52:51.807 +0000'}]}
         }
 
-        local_app.config['DATA_FRESHNESS_CLIENT'] = DATA_FRESHNESS_CLIENT_CLASS
+        local_app.config['DATA_FRESHNESS_CLIENT'] = DATA_FRESHNESS_CLIENT
         response = json.dumps({'freshness_data': {
             'columns': [{}, {}],
             'data': [{'latest updated_at': '2021-07-14 13:52:51.807 +0000'}]
