@@ -3,6 +3,7 @@
 
 import unittest
 import json
+from flask import make_response, jsonify
 from http import HTTPStatus
 from typing import Dict
 
@@ -21,7 +22,9 @@ class DataFreshnessClient(BaseDataFreshnessClient):
         pass
 
     def get_freshness_data(self, params: Dict, optionalHeaders: Dict = None) -> Response:
-        pass
+        return make_response(jsonify({
+            'freshness_data': {'columns': [{}], 'data': [{'latest updated_at': '2021-07-14 13:52:51.807 +0000'}]}
+        }), HTTPStatus.OK)
 
 
 class DataFreshnessTest(unittest.TestCase):
@@ -44,26 +47,31 @@ class DataFreshnessTest(unittest.TestCase):
             response = test.post('/api/freshness/v0/')
             self.assertEqual(response.status_code, HTTPStatus.NOT_IMPLEMENTED)
 
-    @unittest.mock.patch(DATA_FRESHNESS_CLIENT + '.get_freshness_data')
-    def test_good_client_response(self, mock_get_freshness_data: unittest.mock.Mock) -> None:
+    @unittest.mock.patch('amundsen_application.api.freshness.v0._get_table_metadata')
+    def test_client_response(self, mock_get_table_metadata) -> None:
         """
         Test response
         """
+        mock_get_table_metadata.return_value = {}
+
+        local_app.config['DATA_FRESHNESS_CLIENT'] = DATA_FRESHNESS_CLIENT
+
         expected_response_json = {
             'msg': 'Success',
             'freshnessData': {
-                'columns': [{}, {}],
+                'columns': [{}],
                 'data': [{'latest updated_at': '2021-07-14 13:52:51.807 +0000'}]}
         }
 
-        local_app.config['DATA_FRESHNESS_CLIENT'] = DATA_FRESHNESS_CLIENT
-        response = json.dumps({'freshness_data': {
-            'columns': [{}, {}],
-            'data': [{'latest updated_at': '2021-07-14 13:52:51.807 +0000'}]
-        }})
-        mock_get_freshness_data.return_value = Response(response=response,
-                                                        status=HTTPStatus.OK)
         with local_app.test_client() as test:
-            post_response = test.post('/api/freshness/v0/')
+            request_data = {
+                'database': 'fake_db',
+                'cluster': 'fake_cluster',
+                'schema': 'fake_schema',
+                'tableName': 'fake_table'
+            }
+            post_response = test.post('/api/freshness/v0/',
+                                      data=json.dumps(request_data),
+                                      content_type='application/json')
             self.assertEqual(post_response.status_code, HTTPStatus.OK)
             self.assertEqual(post_response.json, expected_response_json)

@@ -45,7 +45,8 @@ def get_table_freshness() -> Response:
             return make_response(payload, HTTPStatus.FORBIDDEN)
 
         table_key = f'{params["database"]}://{params["cluster"]}.{params["schema"]}/{params["tableName"]}'
-        table_metadata = _get_table_metadata(table_key=table_key)
+        # the index and source parameters are not referenced inside the function
+        table_metadata = _get_table_metadata(table_key=table_key, index=0, source='')
 
         response = DATA_FRESHNESS_CLIENT_INSTANCE.get_freshness_data(params=table_metadata)
         status_code = response.status_code
