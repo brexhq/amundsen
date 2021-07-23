@@ -8,7 +8,7 @@ import * as ReactDOM from 'react-dom';
 import * as ReduxPromise from 'redux-promise';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 
@@ -38,27 +38,12 @@ import Footer from './features/Footer';
 import NavBar from './features/NavBar';
 
 const sagaMiddleware = createSagaMiddleware();
-/*
 const createStoreWithMiddleware = applyMiddleware(
   ReduxPromise,
   analyticsMiddleware,
   sagaMiddleware
 )(createStore);
 const store = createStoreWithMiddleware(rootReducer);
-*/
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  rootReducer,
-  composeEnhancers(
-    applyMiddleware(ReduxPromise, analyticsMiddleware, sagaMiddleware)
-  )
-);
 
 sagaMiddleware.run(rootSaga);
 
