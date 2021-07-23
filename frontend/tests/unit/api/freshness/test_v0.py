@@ -48,7 +48,7 @@ class DataFreshnessTest(unittest.TestCase):
             self.assertEqual(response.status_code, HTTPStatus.NOT_IMPLEMENTED)
 
     @unittest.mock.patch('amundsen_application.api.freshness.v0._get_table_metadata')
-    def test_client_response(self, mock_get_table_metadata) -> None:
+    def test_client_response(self, mock_get_table_metadata: unittest.mock.Mock) -> None:
         """
         Test response
         """
