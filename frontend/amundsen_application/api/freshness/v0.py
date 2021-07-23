@@ -33,7 +33,7 @@ def get_table_freshness() -> Response:
                 DATA_FRESHNESS_CLIENT_CLASS = import_string(app.config['DATA_FRESHNESS_CLIENT'])
                 DATA_FRESHNESS_CLIENT_INSTANCE = DATA_FRESHNESS_CLIENT_CLASS()
             else:
-                payload = jsonify({'freshnessData': {}, 'msg': 'A client for the data freshness must be configured'})
+                payload = jsonify({'freshnessData': {'error_text': 'A client for the data freshness must be configured'}})
                 return make_response(payload, HTTPStatus.NOT_IMPLEMENTED)
 
         # get table metadata and pass to data_freshness_client
@@ -41,7 +41,7 @@ def get_table_freshness() -> Response:
         # that can be used to as freshness indicator
         params = request.get_json()
         if not all(param in params for param in ['database', 'cluster', 'schema', 'tableName']):
-            payload = jsonify({'freshnessData': {}, 'msg': 'Missing parameters in request payload'})
+            payload = jsonify({'freshnessData': {'error_text': 'Missing parameters in request payload'}})
             return make_response(payload, HTTPStatus.FORBIDDEN)
 
         table_key = f'{params["database"]}://{params["cluster"]}.{params["schema"]}/{params["tableName"]}'
@@ -56,7 +56,7 @@ def get_table_freshness() -> Response:
             # validate the returned data
             try:
                 data = PreviewDataSchema().load(freshness_data)
-                payload = jsonify({'freshnessData': data, 'msg': 'Success'})
+                payload = jsonify({'freshnessData': data})
             except ValidationError as err:
                 logging.error('Freshness data dump returned errors: ' + str(err.messages))
                 raise Exception('The data freshness client did not return a valid object')
