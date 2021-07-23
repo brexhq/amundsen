@@ -33,7 +33,7 @@ def get_table_freshness() -> Response:
                 DATA_FRESHNESS_CLIENT_CLASS = import_string(app.config['DATA_FRESHNESS_CLIENT'])
                 DATA_FRESHNESS_CLIENT_INSTANCE = DATA_FRESHNESS_CLIENT_CLASS()
             else:
-                payload = jsonify({'freshnessData': {'error_text': 'A client for the data freshness must be configured'}})
+                payload = jsonify({'freshnessData': {'error_text': 'A client for the freshness must be configured'}})
                 return make_response(payload, HTTPStatus.NOT_IMPLEMENTED)
 
         # get table metadata and pass to data_freshness_client
