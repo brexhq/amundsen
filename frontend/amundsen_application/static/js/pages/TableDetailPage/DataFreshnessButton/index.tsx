@@ -75,9 +75,9 @@ export class DataFreshnessButton extends React.Component<
   }
 
   componentDidMount() {
-    const { tableData } = this.props;
+    const { tableData, getFreshnessData } = this.props;
 
-    this.props.getFreshnessData({
+    getFreshnessData({
       database: tableData.database,
       schema: tableData.schema,
       tableName: tableData.name,
@@ -95,13 +95,13 @@ export class DataFreshnessButton extends React.Component<
   };
 
   renderModalBody() {
-    const { freshnessData } = this.props;
+    const { freshnessData, status } = this.props;
 
-    if (this.props.status === FetchingStatus.SUCCESS) {
+    if (status === FetchingStatus.SUCCESS) {
       return <PreviewDataTable isLoading={false} previewData={freshnessData} />;
     }
 
-    if (this.props.status === FetchingStatus.ERROR) {
+    if (status === FetchingStatus.ERROR) {
       return (
         <div>
           <Linkify>{freshnessData.error_text}</Linkify>
@@ -113,28 +113,24 @@ export class DataFreshnessButton extends React.Component<
   }
 
   renderFreshnessButton() {
-    const { freshnessData } = this.props;
+    const { freshnessData, status } = this.props;
 
     // Based on the state, the preview button will show different things.
     let buttonText = 'Fetching...';
     let disabled = true;
-    let iconClass = 'icon-loading';
     let popoverText = 'The data freshness is being fetched';
 
-    switch (this.props.status) {
+    switch (status) {
       case FetchingStatus.SUCCESS:
         buttonText = 'Freshness';
-        iconClass = 'icon-preview';
         disabled = false;
         break;
       case FetchingStatus.UNAVAILABLE:
         buttonText = 'Freshness';
-        iconClass = 'icon-preview';
         popoverText = 'This feature has not been configured by your service';
         break;
       case FetchingStatus.ERROR:
         buttonText = 'Freshness';
-        iconClass = 'icon-preview';
         popoverText =
           freshnessData.error_text ||
           'An internal server error has occurred, please contact service admin';
@@ -148,6 +144,7 @@ export class DataFreshnessButton extends React.Component<
         id="data-freshness-button"
         className="btn btn-default btn-lg"
         disabled={disabled}
+        type="button"
         onClick={this.handleClick}
       >
         {buttonText}
@@ -176,12 +173,14 @@ export class DataFreshnessButton extends React.Component<
   }
 
   render() {
+    const { modalTitle } = this.props;
+    const { showModal } = this.state;
     return (
       <>
         {this.renderFreshnessButton()}
-        <Modal show={this.state.showModal} onHide={this.handleClose}>
+        <Modal show={showModal} onHide={this.handleClose}>
           <Modal.Header className="text-center" closeButton>
-            <Modal.Title>{this.props.modalTitle}</Modal.Title>
+            <Modal.Title>{modalTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.renderModalBody()}</Modal.Body>
         </Modal>
