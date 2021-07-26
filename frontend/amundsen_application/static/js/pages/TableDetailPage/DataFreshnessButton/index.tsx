@@ -5,7 +5,6 @@ import * as React from 'react';
 import { Modal, OverlayTrigger, Popover } from 'react-bootstrap';
 import Linkify from 'react-linkify';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import { getFreshnessData } from 'ducks/tableMetadata/reducer';
 import { GlobalState } from 'ducks/rootReducer';
@@ -31,7 +30,7 @@ export interface StateFromProps {
 }
 
 export interface DispatchFromProps {
-  getFreshnessData: (queryParams: TablePreviewQueryParams) => void;
+  getFreshness: (queryParams: TablePreviewQueryParams) => void;
 }
 
 export interface ComponentProps {
@@ -75,9 +74,9 @@ export class DataFreshnessButton extends React.Component<
   }
 
   componentDidMount() {
-    const { tableData } = this.props;
+    const { tableData, getFreshness } = this.props;
 
-    getFreshnessData({
+    getFreshness({
       database: tableData.database,
       schema: tableData.schema,
       tableName: tableData.name,
@@ -195,8 +194,11 @@ export const mapStateToProps = (state: GlobalState) => ({
   tableData: state.tableMetadata.tableData,
 });
 
-export const mapDispatchToProps = (dispatch: any) =>
-  bindActionCreators({ getFreshnessData }, dispatch);
+export const mapDispatchToProps = (dispatch: any) => ({
+  getFreshness: (queryParams: TablePreviewQueryParams) => {
+    dispatch(getFreshnessData(queryParams));
+  },
+});
 
 export default connect<StateFromProps, DispatchFromProps, ComponentProps>(
   mapStateToProps,
