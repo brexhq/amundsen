@@ -65,6 +65,7 @@ import {
 } from 'interfaces';
 
 import DataPreviewButton from './DataPreviewButton';
+import DataFreshnessButton from './DataFreshnessButton';
 import ExploreButton from './ExploreButton';
 import LineageButton from './LineageButton';
 import FrequentUsers from './FrequentUsers';
@@ -462,6 +463,7 @@ export class TableDetail extends React.Component<
             <div className="header-section header-buttons">
               <LineageButton tableData={data} />
               <TableReportsDropdown resourceReports={data.resource_reports} />
+              <DataFreshnessButton modalTitle={this.getDisplayName()} />
               <DataPreviewButton modalTitle={this.getDisplayName()} />
               <ExploreButton tableData={data} />
             </div>
