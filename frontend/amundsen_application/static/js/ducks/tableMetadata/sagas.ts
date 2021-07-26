@@ -13,11 +13,14 @@ import {
   getColumnDescriptionSuccess,
   getPreviewDataFailure,
   getPreviewDataSuccess,
+  getFreshnessDataFailure,
+  getFreshnessDataSuccess,
 } from './reducer';
 
 import {
   GetPreviewData,
   GetPreviewDataRequest,
+  GetFreshnessDataRequest,
   GetTableData,
   GetTableDataRequest,
   GetColumnDescription,
@@ -28,6 +31,7 @@ import {
   UpdateColumnDescriptionRequest,
   UpdateTableDescription,
   UpdateTableDescriptionRequest,
+  GetFreshnessData,
 } from './types';
 
 export function* getTableDataWorker(action: GetTableDataRequest): SagaIterator {
@@ -176,4 +180,23 @@ export function* getPreviewDataWorker(
 }
 export function* getPreviewDataWatcher(): SagaIterator {
   yield takeLatest(GetPreviewData.REQUEST, getPreviewDataWorker);
+}
+
+export function* getFreshnessDataWorker(
+  action: GetFreshnessDataRequest
+): SagaIterator {
+  try {
+    const response = yield call(
+      API.getFreshnessData,
+      action.payload.queryParams
+    );
+    const { data, status } = response;
+    yield put(getFreshnessDataSuccess(data, status));
+  } catch (error) {
+    const { data, status } = error;
+    yield put(getFreshnessDataFailure(data, status));
+  }
+}
+export function* getFreshnessDataWatcher(): SagaIterator {
+  yield takeLatest(GetFreshnessData.REQUEST, getFreshnessDataWorker);
 }
