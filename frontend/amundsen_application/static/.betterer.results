@@ -492,7 +492,7 @@ exports[`eslint`] = {
       [328, 6, 21, "\'partitionKey\' is defined but never used.", "399589312"],
       [329, 6, 23, "\'partitionValue\' is defined but never used.", "793372348"]
     ],
-    "js/config/config-utils.ts:3027580160": [
+    "js/config/config-utils.ts:2187516631": [
       [11, 0, 45, "\`../interfaces\` import should occur before import of \`./config-types\`", "3885176344"]
     ],
     "js/ducks/announcements/index.spec.ts:1898496537": [
@@ -563,9 +563,9 @@ exports[`eslint`] = {
       [19, 2, 8, "Assignment to function parameter \'resource\'.", "2131237679"],
       [20, 2, 248, "Expected a default case.", "1034339850"]
     ],
-    "js/ducks/tableMetadata/api/v0.ts:732314834": [
-      [79, 8, 23, "Use object destructuring.", "1142306891"],
-      [138, 23, -4284, "Expected to return a value at the end of arrow function.", "5381"]
+    "js/ducks/tableMetadata/api/v0.ts:488078374": [
+      [78, 8, 23, "Use object destructuring.", "1142306891"],
+      [137, 23, -4208, "Expected to return a value at the end of arrow function.", "5381"]
     ],
     "js/ducks/tableMetadata/index.spec.ts:2846530620": [
       [480, 22, 11, "\'mockSuccess\' is already declared in the upper scope.", "1120045516"],
@@ -602,15 +602,15 @@ exports[`eslint`] = {
       [107, 6, 36, "Static HTML elements with event handlers require a role.", "3801508926"],
       [125, 16, 20, "Must use destructuring state assignment", "2976153148"]
     ],
-    "js/features/ColumnList/ColumnType/parser.ts:650405689": [
-      [51, 6, 10, "Assignment to function parameter \'startIndex\'.", "3807744539"],
-      [52, 6, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
-      [75, 10, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
-      [77, 8, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
-      [101, 8, 10, "Assignment to function parameter \'startIndex\'.", "3807744539"],
-      [102, 8, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
-      [105, 6, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
-      [143, 4, 10, "Assignment to function parameter \'columnType\'.", "460876587"]
+    "js/features/ColumnList/ColumnType/parser.ts:1815713777": [
+      [48, 6, 10, "Assignment to function parameter \'startIndex\'.", "3807744539"],
+      [49, 6, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
+      [72, 10, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
+      [74, 8, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
+      [98, 8, 10, "Assignment to function parameter \'startIndex\'.", "3807744539"],
+      [99, 8, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
+      [102, 6, 12, "Assignment to function parameter \'currentIndex\'.", "2078922066"],
+      [140, 4, 10, "Assignment to function parameter \'columnType\'.", "460876587"]
     ],
     "js/features/ColumnList/index.spec.tsx:3000446426": [
       [14, 0, 48, "\`.\` import should occur after import of \`./testDataBuilder\`", "1857255231"]
@@ -977,11 +977,11 @@ exports[`eslint`] = {
     "js/pages/TableDetailPage/index.spec.tsx:1320221888": [
       [64, 6, 25, "Use object destructuring.", "1230260048"]
     ],
-    "js/pages/TableDetailPage/index.tsx:902622043": [
-      [138, 2, 20, "key should be placed after componentDidUpdate", "3916788587"],
-      [148, 22, 12, "\'getTableData\' is already declared in the upper scope.", "3938384029"],
-      [165, 6, 12, "\'getTableData\' is already declared in the upper scope.", "3938384029"],
-      [236, 6, 28, "\'openRequestDescriptionDialog\' is already declared in the upper scope.", "4102713454"]
+    "js/pages/TableDetailPage/index.tsx:2519576402": [
+      [137, 2, 20, "key should be placed after componentDidUpdate", "3916788587"],
+      [147, 22, 12, "\'getTableData\' is already declared in the upper scope.", "3938384029"],
+      [164, 6, 12, "\'getTableData\' is already declared in the upper scope.", "3938384029"],
+      [235, 6, 28, "\'openRequestDescriptionDialog\' is already declared in the upper scope.", "4102713454"]
     ],
     "js/utils/textUtils.ts:2545492889": [
       [19, 6, 46, "Unexpected lexical declaration in case block.", "156477898"]
