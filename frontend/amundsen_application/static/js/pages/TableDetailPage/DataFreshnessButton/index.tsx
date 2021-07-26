@@ -75,7 +75,7 @@ export class DataFreshnessButton extends React.Component<
   }
 
   componentDidMount() {
-    const { tableData, getFreshnessData } = this.props;
+    const { tableData } = this.props;
 
     getFreshnessData({
       database: tableData.database,
