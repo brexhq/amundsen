@@ -32,7 +32,7 @@ class TableUri:
         """
         TABLE_KEY_FORMAT = '{db}://{cluster}.{schema}/{tbl}'
         """
-        pattern = re.compile(r'^(?P<database>.*?)://(?P<cluster>.*)\.(?P<schema>.*?)/(?P<table>.*?)$', re.X)
+        pattern = re.compile(r'^(?P<database>.*?)://(?P<cluster>.*?)\.(?P<schema>.*?)/(?P<table>.*?)$', re.X)
 
         groups = pattern.match(uri)
 
