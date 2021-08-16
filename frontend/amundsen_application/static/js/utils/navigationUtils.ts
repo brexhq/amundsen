@@ -82,7 +82,7 @@ export const buildLineageURL = ({
   schema,
   name,
 }: Partial<TableMetadata>) =>
-  `/lineage/table/${cluster}/${database}/${schema}/${name}`;
+  `/brex_lineage/table/${cluster}/${database}/${schema}/${name}`;
 
 /**
  * Creates the dashboard detail URL from the URI
