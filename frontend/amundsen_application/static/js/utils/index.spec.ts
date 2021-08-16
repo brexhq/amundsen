@@ -233,7 +233,7 @@ describe('navigationUtils', () => {
         schema: 'schema',
         name: 'name',
       };
-      const expected = `/lineage/table/cluster/database/schema/name`;
+      const expected = `/brex_lineage/table/cluster/database/schema/name`;
       const actual = NavigationUtils.buildLineageURL(mockMetadata);
 
       expect(actual).toEqual(expected);
