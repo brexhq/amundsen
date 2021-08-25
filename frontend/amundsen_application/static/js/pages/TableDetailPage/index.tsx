@@ -59,7 +59,6 @@ import {
 import DataPreviewButton from './DataPreviewButton';
 import DataFreshnessButton from './DataFreshnessButton';
 import ExploreButton from './ExploreButton';
-import LineageButton from './LineageButton';
 import FrequentUsers from './FrequentUsers';
 import LineageLink from './LineageLink';
 import LineageList from './LineageList';
