@@ -59,7 +59,6 @@ import {
 import DataPreviewButton from './DataPreviewButton';
 import DataFreshnessButton from './DataFreshnessButton';
 import ExploreButton from './ExploreButton';
-import LineageButton from './LineageButton';
 import FrequentUsers from './FrequentUsers';
 import LineageLink from './LineageLink';
 import LineageList from './LineageList';
@@ -392,7 +391,6 @@ export class TableDetail extends React.Component<
               <SourceLink tableSource={data.source} />
             </div>
             <div className="header-section header-buttons">
-              <LineageButton tableData={data} />
               <TableReportsDropdown resourceReports={data.resource_reports} />
               <DataFreshnessButton modalTitle={this.getDisplayName()} />
               <DataPreviewButton modalTitle={this.getDisplayName()} />
