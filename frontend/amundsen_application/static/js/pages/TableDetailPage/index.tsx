@@ -408,7 +408,6 @@ export class TableDetail extends React.Component<
               <SourceLink tableSource={data.source} />
             </div>
             <div className="header-section header-buttons">
-              <LineageButton tableData={data} />
               <TableReportsDropdown resourceReports={data.resource_reports} />
               <DataPreviewButton modalTitle={this.getDisplayName()} />
               <ExploreButton tableData={data} />
