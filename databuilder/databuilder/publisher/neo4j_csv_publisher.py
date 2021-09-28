@@ -14,8 +14,9 @@ import neo4j
 import pandas
 from jinja2 import Template
 from neo4j import GraphDatabase, Transaction
-from neo4j.exceptions import CypherError, TransientError
+from neo4j.exceptions import Neo4jError  # neo4j 4.x
 from pyhocon import ConfigFactory, ConfigTree
+from typing import Set, List  # neo4j 4.x
 
 from databuilder.publisher.base_publisher import Publisher
 from databuilder.publisher.neo4j_preprocessor import NoopRelationPreprocessor
@@ -137,10 +138,11 @@ class Neo4jCsvPublisher(Publisher):
             else neo4j.TRUST_ALL_CERTIFICATES
         self._driver = \
             GraphDatabase.driver(conf.get_string(NEO4J_END_POINT_KEY),
-                                 max_connection_life_time=conf.get_int(NEO4J_MAX_CONN_LIFE_TIME_SEC),
+                                 max_connection_lifetime=conf.get_int(NEO4J_MAX_CONN_LIFE_TIME_SEC),  # neo4j 4.x
                                  auth=(conf.get_string(NEO4J_USER), conf.get_string(NEO4J_PASSWORD)),
                                  encrypted=conf.get_bool(NEO4J_ENCRYPTED),
-                                 trust=trust)
+                                 # trust=trust # neo4j 4x
+                                 )
         self._transaction_size = conf.get_int(NEO4J_TRANSACTION_SIZE)
         self._session = self._driver.session()
         self._confirm_rel_created = conf.get_bool(NEO4J_RELATIONSHIP_CREATION_CONFIRM)
@@ -426,7 +428,8 @@ class Neo4jCsvPublisher(Publisher):
         try:
             LOGGER.debug('Executing statement: %s with params %s', stmt, params)
 
-            result = tx.run(str(stmt).encode('utf-8', 'ignore'), parameters=params)
+            # neo4j 4.x encoding
+            result = tx.run(str(stmt), parameters=params)
             if expect_result and not result.single():
                 raise RuntimeError(f'Failed to executed statement: {stmt}')
 
