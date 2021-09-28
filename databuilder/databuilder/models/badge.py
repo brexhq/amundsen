@@ -63,6 +63,13 @@ class BadgeMetadata(GraphSerializable, TableSerializable, AtlasSerializable):
         self.start_key = start_key
         self.badges = badges
 
+        # TODO: seems removed, no more validation on key patterns, if DAG runs correctly, can delete the below --minsu
+        """
+        table_key_pattern = re.compile('[a-zA-Z0-9_.-]+://[a-zA-Z0-9_.-]+.[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+')
+        dashboard_key_pattern = re.compile('[a-zA-Z0-9_.-]+_dashboard://[a-zA-Z0-9_.-]+.[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+')
+        column_key_pattern = re.compile('[a-zA-Z0-9_.-]+://[a-zA-Z0-9_.-]+.[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+')
+        """
+
         self._node_iter = self._create_node_iterator()
         self._relation_iter = self._create_relation_iterator()
         self._record_iter = self._create_record_iterator()
