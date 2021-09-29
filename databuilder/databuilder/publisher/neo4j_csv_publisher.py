@@ -14,9 +14,8 @@ import neo4j
 import pandas
 from jinja2 import Template
 from neo4j import GraphDatabase, Transaction
-from neo4j.exceptions import Neo4jError  # neo4j 4.x
+from neo4j.exceptions import Neo4jError, TransientError  # neo4j 4.x
 from pyhocon import ConfigFactory, ConfigTree
-from typing import Set, List  # neo4j 4.x
 
 from databuilder.publisher.base_publisher import Publisher
 from databuilder.publisher.neo4j_preprocessor import NoopRelationPreprocessor
@@ -464,7 +463,7 @@ class Neo4jCsvPublisher(Publisher):
         with self._driver.session() as session:
             try:
                 session.run(stmt)
-            except CypherError as e:
+            except Neo4jError as e:
                 if 'An equivalent constraint already exists' not in e.__str__():
                     raise
                 # Else, swallow the exception, to make this function idempotent.
