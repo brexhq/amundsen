@@ -104,7 +104,6 @@ setup(
         "elasticsearch>=6.2.0,<8.0",
         "neo4j==4.1.1",
         "requests<3.0",
-        "freezegun>=1.1.0",
         "atomicwrites>=1.1.5",
         "more-itertools>=4.2.0",
         "pluggy>=0.6.0",
