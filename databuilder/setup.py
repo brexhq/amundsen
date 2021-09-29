@@ -102,7 +102,7 @@ setup(
     dependency_links=[],
     install_requires=[
         "elasticsearch>=6.2.0,<8.0",
-        "neo4j==4.1.1,",
+        "neo4j==4.1.1",
         "requests<3.0",
         "freezegun>=1.1.0",
         "atomicwrites>=1.1.5",
