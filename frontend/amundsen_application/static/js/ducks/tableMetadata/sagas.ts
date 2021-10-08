@@ -15,6 +15,8 @@ import {
   getPreviewDataSuccess,
   getFreshnessDataFailure,
   getFreshnessDataSuccess,
+  getTableQualityChecksSuccess,
+  getTableQualityChecksFailure,
 } from './reducer';
 
 import {
@@ -32,6 +34,8 @@ import {
   UpdateTableDescription,
   UpdateTableDescriptionRequest,
   GetFreshnessData,
+  GetTableQualityChecksRequest,
+  GetTableQualityChecks,
 } from './types';
 
 export function* getTableDataWorker(action: GetTableDataRequest): SagaIterator {
@@ -199,4 +203,21 @@ export function* getFreshnessDataWorker(
 }
 export function* getFreshnessDataWatcher(): SagaIterator {
   yield takeLatest(GetFreshnessData.REQUEST, getFreshnessDataWorker);
+}
+
+export function* getTableQualityChecksWorker(
+  action: GetTableQualityChecksRequest
+): SagaIterator {
+  const { key } = action.payload;
+  try {
+    const response = yield call(API.getTableQualityChecksSummary, key);
+    const { checks, status } = response;
+    yield put(getTableQualityChecksSuccess(checks, status));
+  } catch (error) {
+    const { status } = error;
+    yield put(getTableQualityChecksFailure(status));
+  }
+}
+export function* getTableQualityChecksWatcher(): SagaIterator {
+  yield takeLatest(GetTableQualityChecks.REQUEST, getTableQualityChecksWorker);
 }

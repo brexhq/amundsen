@@ -32,6 +32,7 @@ const configDefault: AppConfig = {
   userIdLabel: 'email address',
   issueTracking: {
     enabled: false,
+    issueDescriptionTemplate: '',
   },
   logoPath: null,
   logoTitle: 'AMUNDSEN',
@@ -129,6 +130,10 @@ const configDefault: AppConfig = {
         hive: {
           displayName: 'Hive',
           iconClass: 'icon-hive',
+        },
+        oracle: {
+          displayName: 'Oracle',
+          iconClass: 'icon-oracle',
         },
         presto: {
           displayName: 'Presto',
@@ -330,6 +335,9 @@ const configDefault: AppConfig = {
       partitionValue?: string
     ) =>
       `https://DEFAULT_EXPLORE_URL?schema=${schema}&cluster=${cluster}&db=${database}&table=${table}`,
+  },
+  tableQualityChecks: {
+    isEnabled: false,
   },
 };
 

@@ -32,8 +32,13 @@ class Config:
 
     COLUMN_STAT_ORDER = None  # type: Dict[str, int]
 
+    # The following three variables control whether table descriptions can be edited via the UI
+    # ALL_UNEDITABLE_SCHEMAS: set environment variable to 'true' if you don't want any schemas to be able to be edited
+    # UNEDITABLE_SCHEMAS: a set of schema names whose tables will not be editable
+    # UNEDITABLE_TABLE_DESCRIPTION_MATCH_RULES: a list of regex rules for schema name, table name, or both
+    # See https://www.amundsen.io/amundsen/frontend/docs/flask_config/#uneditable-table-descriptions for more info!
+    ALL_UNEDITABLE_SCHEMAS = os.getenv('ALL_UNEDITABLE_SCHEMAS', 'false') == 'true'  # type: bool
     UNEDITABLE_SCHEMAS = set()  # type: Set[str]
-
     UNEDITABLE_TABLE_DESCRIPTION_MATCH_RULES = []  # type: List[MatchRuleObject]
 
     # DEPRECATED (since version 3.9.0): Please use `POPULAR_RESOURCES_COUNT`
@@ -77,6 +82,9 @@ class Config:
     PREVIEW_CLIENT_USERNAME = os.getenv('PREVIEW_CLIENT_USERNAME')  # type: Optional[str]
     PREVIEW_CLIENT_PASSWORD = os.getenv('PREVIEW_CLIENT_PASSWORD')  # type: Optional[str]
     PREVIEW_CLIENT_CERTIFICATE = os.getenv('PREVIEW_CLIENT_CERTIFICATE')  # type: Optional[str]
+
+    # Settings for Quality client
+    QUALITY_CLIENT = os.getenv('QUALITY_CLIENT', None)  # type: Optional[str]
 
     # Settings for Announcement Client integration
     ANNOUNCEMENT_CLIENT_ENABLED = os.getenv('ANNOUNCEMENT_CLIENT_ENABLED') == 'true'  # type: bool

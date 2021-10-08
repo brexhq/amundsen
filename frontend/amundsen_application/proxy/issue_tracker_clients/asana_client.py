@@ -57,23 +57,32 @@ class AsanaClient(BaseIssueTrackerClient):
             all_issues_url=self._task_url(table_parent_task_gid),
         )
 
-    def create_issue(self, table_uri: str, title: str, description: str) -> DataIssue:
+    def create_issue(self,
+                     table_uri: str,
+                     title: str,
+                     description: str,
+                     priority_level: str,
+                     table_url: str) -> DataIssue:
         """
-        Creates an issue in Jira
-        :param description: Description of the Jira issue
+        Creates an issue in Asana
+        :param description: Description of the Asana issue
+        :param priority_level: priority level for the ticket
         :param table_uri: Table Uri ie databasetype://database/table
-        :param title: Title of the Jira ticket
+        :param title: Title of the Asana ticket
+        :param table_url: Link to access the table
         :return: Metadata about the newly created issue
         """
 
         table_parent_task_gid = self._get_parent_task_gid_for_table_uri(table_uri)
+        enum_value = next(opt for opt in self.priority_field_enum_options if opt['name'] == priority_level)
 
         return self._asana_task_to_amundsen_data_issue(
             self.asana_client.tasks.create_subtask_for_task(
                 table_parent_task_gid,
                 {
                     'name': title,
-                    'notes': description,
+                    'notes': description + f'\n Table URL: {table_url}',
+                    'custom_fields': {self.priority_field_gid: enum_value['gid']}
                 }
             )
         )
@@ -132,6 +141,7 @@ class AsanaClient(BaseIssueTrackerClient):
 
         self.table_uri_field_gid = table_uri_field['gid']
         self.priority_field_gid = priority_field['gid']
+        self.priority_field_enum_options = priority_field['enum_options']
 
     def _get_parent_task_gid_for_table_uri(self, table_uri: str) -> str:
         table_parent_tasks = list(self.asana_client.tasks.search_tasks_for_workspace(

@@ -63,10 +63,15 @@ class IssueAPI(Resource):
             self.reqparse.add_argument('title', type=str, location='json')
             self.reqparse.add_argument('key', type=str, location='json')
             self.reqparse.add_argument('description', type=str, location='json')
+            self.reqparse.add_argument('priority_level', type=str, location='json')
+            self.reqparse.add_argument('resource_path', type=str, location='json')
             args = self.reqparse.parse_args()
             response = self.client.create_issue(description=args['description'],
+                                                priority_level=args['priority_level'],
                                                 table_uri=args['key'],
-                                                title=args['title'])
+                                                title=args['title'],
+                                                table_url=app.config['FRONTEND_BASE'] + args['resource_path']
+                                                if args['resource_path'] else 'Not Found')
             return make_response(jsonify({'issue': response.serialize()}), HTTPStatus.OK)
 
         except IssueConfigurationException as e:

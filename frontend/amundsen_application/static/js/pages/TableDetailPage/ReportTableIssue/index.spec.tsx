@@ -5,23 +5,26 @@ import * as React from 'react';
 
 import { shallow } from 'enzyme';
 
-import AppConfig from 'config/config';
 import globalState from 'fixtures/globalState';
 import { NotificationType } from 'interfaces';
-import {
-  ComponentProps,
-  ReportTableIssue,
-  ReportTableIssueProps,
-  mapDispatchToProps,
-  mapStateToProps,
-} from '.';
+import { ReportTableIssue, ReportTableIssueProps, mapDispatchToProps } from '.';
 
 const globalAny: any = global;
+
+let mockGetIssueDescriptionTemplate = 'This is a description template';
+jest.mock('config/config-utils', () => {
+  const configUtilsModule = jest.requireActual('config/config-utils');
+  return {
+    ...configUtilsModule,
+    getIssueDescriptionTemplate: () => mockGetIssueDescriptionTemplate,
+  };
+});
 
 const mockFormData = {
   key: 'val1',
   title: 'title',
   description: 'description',
+  priority_level: 'priority level',
   resource_name: 'resource name',
   resource_path: 'path',
   owners: 'test@test.com',
@@ -38,6 +41,8 @@ const mockCreateIssuePayload = {
   key: 'key',
   title: 'title',
   description: 'description',
+  priority_level: 'P2',
+  resource_path: '/table_detail/cluster/database/schema/table_name',
 };
 
 const mockNotificationPayload = {
@@ -85,6 +90,26 @@ describe('ReportTableIssue', () => {
       wrapper.setState({ isOpen: true });
 
       expect(wrapper.find('.report-table-issue-modal')).toBeTruthy();
+    });
+
+    it('Renders description template', () => {
+      mockGetIssueDescriptionTemplate = 'This is a description template';
+      const { wrapper } = setup();
+      wrapper.setState({ isOpen: true });
+
+      expect(wrapper.find('textarea').props().children).toBe(
+        mockGetIssueDescriptionTemplate
+      );
+    });
+
+    it('Renders empty description template', () => {
+      mockGetIssueDescriptionTemplate = '';
+      const { wrapper } = setup();
+      wrapper.setState({ isOpen: true });
+
+      expect(wrapper.find('textarea').props().children).toBe(
+        mockGetIssueDescriptionTemplate
+      );
     });
 
     describe('toggle', () => {

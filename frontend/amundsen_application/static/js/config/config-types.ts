@@ -29,6 +29,7 @@ export interface AppConfig {
   tableLineage: TableLineageConfig;
   columnLineage: ColumnLineageConfig;
   tableProfile: TableProfileConfig;
+  tableQualityChecks: TableQualityChecksConfig;
 }
 
 export interface AppConfigCustom {
@@ -54,6 +55,7 @@ export interface AppConfigCustom {
   tableLineage?: TableLineageConfig;
   columnLineage?: ColumnLineageConfig;
   tableProfile?: TableProfileConfig;
+  tableQualityChecks?: TableQualityChecksConfig;
 }
 
 /**
@@ -372,10 +374,12 @@ interface EditableTextConfig {
 /**
  * IssueTrackingConfig - configures whether to display the issue tracking feature
  * that allows users to display tickets associated with a table and create ones
- * linked to a table
+ * linked to a table, and allows a customized template that will be prepopulated
+ * in the description for reporting an issue
  */
 interface IssueTrackingConfig {
   enabled: boolean;
+  issueDescriptionTemplate: string;
 }
 
 export enum NumberStyle {
@@ -397,4 +401,12 @@ export interface NumberStyleConfig {
 export interface NumberFormatConfig {
   numberSystem: string | null;
   [NumberStyle.DECIMAL]?: NumberStyleConfig;
+}
+
+/**
+ * TableQualityChecksConfig - configuration to query and display data quality check status from
+ * an external provider. API must be configured.
+ */
+export interface TableQualityChecksConfig {
+  isEnabled: boolean;
 }

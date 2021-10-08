@@ -150,7 +150,11 @@ class JiraClientTest(unittest.TestCase):
                                          issue_tracker_password=app.config['ISSUE_TRACKER_PASSWORD'],
                                          issue_tracker_project_id=app.config['ISSUE_TRACKER_PROJECT_ID'],
                                          issue_tracker_max_results=app.config['ISSUE_TRACKER_MAX_RESULTS'])
-                jira_client.create_issue(description='desc', table_uri='key', title='title')
+                jira_client.create_issue(description='desc',
+                                         priority_level='P2',
+                                         table_uri='key',
+                                         title='title',
+                                         table_url='http://table')
             except JIRAError as e:
                 self.assertTrue(type(e), type(JIRAError))
                 self.assertTrue(e, 'Some exception')
@@ -169,7 +173,11 @@ class JiraClientTest(unittest.TestCase):
                                      issue_tracker_password=app.config['ISSUE_TRACKER_PASSWORD'],
                                      issue_tracker_project_id=app.config['ISSUE_TRACKER_PROJECT_ID'],
                                      issue_tracker_max_results=app.config['ISSUE_TRACKER_MAX_RESULTS'])
-            results = jira_client.create_issue(description='desc', table_uri='key', title='title')
+            results = jira_client.create_issue(description='desc',
+                                               priority_level='P2',
+                                               table_uri='key',
+                                               title='title',
+                                               table_url='http://table')
             mock_JIRA_client.assert_called
             self.assertEqual(results, self.mock_issue_instance)
             mock_JIRA_client.return_value.create_issue.assert_called_with(fields=dict(project={
@@ -179,5 +187,10 @@ class JiraClientTest(unittest.TestCase):
                 'name': 'Bug',
             }, labels=mock_labels,
                 summary='title',
-                description='desc \n Reported By: test@email.com \n Table Key: key [PLEASE DO NOT REMOVE]',
-                reporter={'name': 'test'}))
+                description=("desc \n "
+                             "Reported By: test@email.com \n "
+                             "Table Key: key [PLEASE DO NOT REMOVE] \n "
+                             "Table URL: http://table"),
+                priority={
+                    'name': 'Major'
+            }, reporter={'name': 'test'}))

@@ -6,12 +6,13 @@ from typing import Any
 from unittest.mock import MagicMock, patch
 
 from amundsen_common.entity.resource_type import ResourceType
+from amundsen_common.models.api import health_check
 from amundsen_common.models.dashboard import DashboardSummary
 from amundsen_common.models.popular_table import PopularTable
 from amundsen_common.models.table import (Application, Badge, Column,
                                           ProgrammaticDescription, Reader,
-                                          Source, Stat, Table, Tag, User,
-                                          Watermark)
+                                          Source, Stat, Table, TableSummary,
+                                          Tag, User, Watermark)
 from amundsen_common.models.user import User as UserEntity
 from amundsen_rds.models.application import Application as RDSApplication
 from amundsen_rds.models.badge import Badge as RDSBadge
@@ -22,6 +23,8 @@ from amundsen_rds.models.column import ColumnStat as RDSColumnStat
 from amundsen_rds.models.column import TableColumn as RDSColumn
 from amundsen_rds.models.dashboard import Dashboard as RDSDashboard
 from amundsen_rds.models.dashboard import DashboardChart as RDSDashboardChart
+from amundsen_rds.models.dashboard import \
+    DashboardCluster as RDSDashboardCluster
 from amundsen_rds.models.dashboard import \
     DashboardDescription as RDSDashboardDescription
 from amundsen_rds.models.dashboard import \
@@ -182,6 +185,15 @@ class TestMySQLProxy(unittest.TestCase):
                          ])
 
         self.assertEqual(str(expected), str(actual_table))
+
+    @patch.object(mysql_proxy, 'RDSClient')
+    def test_health_mysql(self, mock_rds_client: Any) -> None:
+        proxy = MySQLProxy()
+        health_actual = proxy.health()
+        expected_checks = {'MySQLProxy:connection': {'status': 'not checked'}}
+        health_expected = health_check.HealthCheck(status='ok', checks=expected_checks)
+        self.assertEqual(health_actual.status, health_expected.status)
+        self.assertDictEqual(health_actual.checks, health_expected.checks)
 
     @patch.object(mysql_proxy, 'RDSClient')
     def test_get_table_description(self, mock_rds_client: Any) -> None:
@@ -450,9 +462,12 @@ class TestMySQLProxy(unittest.TestCase):
 
         self.assertEqual(1000, actual)
 
-    @patch.object(MySQLProxy, '_get_global_popular_tables_uris')
+    @patch.object(MySQLProxy, '_get_global_popular_resources_uris')
     @patch.object(mysql_proxy, 'RDSClient')
-    def test_get_popular_tables(self, mock_rds_client: Any, mock_get_global_popular_tables_uris: Any) -> None:
+    def test_get_popular_resources(self,
+                                   mock_rds_client: Any,
+                                   mock_get_global_popular_resources_uris: Any) -> None:
+        # tables
         database = RDSDatabase(name='db')
         cluster = RDSCluster(name='cluster')
         schema = RDSSchema(name='schema')
@@ -466,6 +481,22 @@ class TestMySQLProxy(unittest.TestCase):
         table1.schema = schema
         table2.schema = schema
         table1.description = table_description
+
+        # dashboards
+        dashboard = RDSDashboard(rk='foo_dashboard://gold.bar/dashboard_id',
+                                 name='dashboard name',
+                                 dashboard_url='http://www.foo.bar/dashboard_id',
+                                 created_timestamp=123456789)
+        dashboard_group = RDSDashboardGroup(name='group_name',
+                                            dashboard_group_url='http://www.group_url.com')
+        dashboard_group.cluster = RDSDashboardCluster(name='cluster_name')
+        dashboard.group = dashboard_group
+        dashboard.description = RDSDashboardDescription(description='description')
+        dashboard.execution = [RDSDashboardExecution(rk='dashboard_last_successful_execution',
+                                                     timestamp=9876543210),
+                               RDSDashboardExecution(rk='dashboard_last_execution',
+                                                     timestamp=987654321,
+                                                     state='good_state')]
 
         mock_client = MagicMock()
         mock_rds_client.return_value = mock_client
@@ -488,20 +519,29 @@ class TestMySQLProxy(unittest.TestCase):
         mock_session_query_filter_options_options = MagicMock()
         mock_session_query_filter_options.options.return_value = mock_session_query_filter_options_options
 
-        mock_session_query_filter_options_options.all.return_value = [table1, table2]
+        mock_session_query_filter_options_options.all.side_effect = [[table1, table2], [dashboard]]
 
-        expected = [
-            PopularTable(database='db', cluster='cluster', schema='schema', name='foo', description='test description'),
-            PopularTable(database='db', cluster='cluster', schema='schema', name='bar'),
-        ]
+        expected = {
+            ResourceType.Table.name: [
+                TableSummary(database='db', cluster='cluster', schema='schema', name='foo',
+                             description='test description'),
+                TableSummary(database='db', cluster='cluster', schema='schema', name='bar'),
+            ],
+            ResourceType.Dashboard.name: [
+                DashboardSummary(uri='foo_dashboard://gold.bar/dashboard_id', cluster='cluster_name',
+                                 group_name='group_name', group_url='http://www.group_url.com',
+                                 product='foo', name='dashboard name', url='http://www.foo.bar/dashboard_id',
+                                 description='description', last_successful_run_timestamp=9876543210)
+            ]
+        }
 
         proxy = MySQLProxy()
-        actual = proxy.get_popular_tables(num_entries=2)
+        actual = proxy.get_popular_resources(num_entries=2, resource_types=['table', 'dashboard'])
 
         self.assertEqual(expected.__repr__(), actual.__repr__())
 
     @patch.object(mysql_proxy, 'RDSClient')
-    def test_get_popular_tables_cache_hit(self, mock_rds_client: Any) -> None:
+    def test_get_popular_resources_cache_hit(self, mock_rds_client: Any) -> None:
         mock_client = MagicMock()
         mock_rds_client.return_value = mock_client
 
@@ -524,8 +564,8 @@ class TestMySQLProxy(unittest.TestCase):
         mock_session_query_orderby_limit.all = mock_session_query_orderby_limit_all
 
         proxy = MySQLProxy()
-        proxy._get_global_popular_tables_uris(num_entries=2)
-        proxy._get_global_popular_tables_uris(num_entries=2)
+        proxy._get_global_popular_resources_uris(num_entries=2)
+        proxy._get_global_popular_resources_uris(num_entries=2)
 
         self.assertEqual(1, mock_session_query_orderby_limit_all.call_count)
 

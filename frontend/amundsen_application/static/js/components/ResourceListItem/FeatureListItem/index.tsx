@@ -41,6 +41,7 @@ const FeatureListItem: React.FC<FeatureListItemProps> = ({
           logClick(e, {
             target_id: 'feature_list_item',
             value: logging.source,
+            position: logging.index.toString(),
           })
         }
       >
@@ -48,7 +49,7 @@ const FeatureListItem: React.FC<FeatureListItemProps> = ({
           <span className={generateResourceIconClass(source, feature.type)} />
           <div className="resource-info-text my-auto">
             <h3 className="resource-name">
-              {`${feature.feature_group}.${feature.name}`}
+              {`${feature.feature_group}.${feature.name}.${feature.version}`}
             </h3>
             <div className="text-body-w3 text-secondary truncated">
               {feature.description}

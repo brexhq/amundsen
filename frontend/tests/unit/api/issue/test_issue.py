@@ -15,6 +15,7 @@ local_app = create_app('amundsen_application.config.TestConfig', 'tests/template
 class IssueTest(unittest.TestCase):
 
     def setUp(self) -> None:
+        local_app.config['FRONTEND_BASE'] = 'http://url'
         local_app.config['ISSUE_TRACKER_URL'] = 'url'
         local_app.config['ISSUE_TRACKER_CLIENT_ENABLED'] = True
         self.mock_issue = {
@@ -98,8 +99,10 @@ class IssueTest(unittest.TestCase):
         with local_app.test_client() as test:
             response = test.post('/api/issue/issue', data={
                 'description': 'test description',
+                'priority_level': 'P2',
                 'title': 'test title',
-                'key': 'key'
+                'key': 'key',
+                'resource_path': '/table_detail/cluster/database/schema/table_name'
             })
             self.assertEqual(response.status_code, HTTPStatus.ACCEPTED)
 
@@ -114,8 +117,10 @@ class IssueTest(unittest.TestCase):
         with local_app.test_client() as test:
             response = test.post('/api/issue/issue', data={
                 'description': 'test description',
+                'priority_level': 'P2',
                 'title': 'test title',
-                'key': 'key'
+                'key': 'key',
+                'resource_path': '/table_detail/cluster/database/schema/table_name'
             })
             self.assertEqual(response.status_code, HTTPStatus.NOT_IMPLEMENTED)
 
@@ -126,8 +131,10 @@ class IssueTest(unittest.TestCase):
          """
         with local_app.test_client() as test:
             response = test.post('/api/issue/issue', data={
+                'priority_level': 'P2',
                 'key': 'table_key',
                 'title': 'test title',
+                'resource_path': '/table_detail/cluster/database/schema/table_name'
             })
             self.assertEqual(response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
 
@@ -139,7 +146,9 @@ class IssueTest(unittest.TestCase):
         with local_app.test_client() as test:
             response = test.post('/api/issue/issue', data={
                 'description': 'test description',
-                'title': 'test title'
+                'priority_level': 'P2',
+                'title': 'test title',
+                'resource_path': '/table_detail/cluster/database/schema/table_name'
             })
             self.assertEqual(response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
 
@@ -151,7 +160,37 @@ class IssueTest(unittest.TestCase):
         with local_app.test_client() as test:
             response = test.post('/api/issue/issue', data={
                 'description': 'test description',
+                'priority_level': 'P2',
                 'key': 'table_key',
+                'resource_path': '/table_detail/cluster/database/schema/table_name'
+            })
+            self.assertEqual(response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
+
+    def test_create_jira_issue_no_resource_path(self) -> None:
+        """
+         Test request failure if resource path is missing
+         :return:
+         """
+        with local_app.test_client() as test:
+            response = test.post('/api/issue/issue', data={
+                'description': 'test description',
+                'priority_level': 'P2',
+                'title': 'test title',
+                'key': 'key'
+            })
+            self.assertEqual(response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
+
+    def test_create_jira_issue_no_priority(self) -> None:
+        """
+         Test request failure if resource path is missing
+         :return:
+         """
+        with local_app.test_client() as test:
+            response = test.post('/api/issue/issue', data={
+                'description': 'test description',
+                'title': 'test title',
+                'key': 'key',
+                'resource_path': '/table_detail/cluster/database/schema/table_name'
             })
             self.assertEqual(response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
 
@@ -168,8 +207,10 @@ class IssueTest(unittest.TestCase):
                                  content_type='multipart/form-data',
                                  data={
                                      'description': 'test description',
+                                     'priority_level': 'P2',
                                      'title': 'title',
-                                     'key': 'key'
+                                     'key': 'key',
+                                     'resource_path': '/table_detail/cluster/database/schema/table_name'
                                  })
             data = json.loads(response.data)
             self.assertEqual(response.status_code, HTTPStatus.OK)

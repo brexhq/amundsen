@@ -1,7 +1,7 @@
 # Copyright Contributors to the Amundsen project.
 # SPDX-License-Identifier: Apache-2.0
 
-elasticsearch>=6.2.0,<7.0
+elasticsearch>=6.2.0,<8.0
 neo4j-driver>=1.7.2,<2.0
 requests>=2.25.0,<3.0
 
@@ -26,4 +26,4 @@ pandas>=0.21.0,<1.2.0
 responses>=0.10.6
 
 amundsen-common>=0.16.0
-amundsen-rds>=0.0.4
+amundsen-rds==0.0.5
