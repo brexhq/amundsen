@@ -238,7 +238,7 @@ class ElasticsearchProxy():
 
         for r in responses:
             if r.success():
-                results_count = r.hits.total.value
+                results_count = r.hits.total
                 if results_count > 0:
                     resource_type = r.hits.hits[0]._type
                     results = []
