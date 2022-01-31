@@ -279,6 +279,7 @@ class ElasticsearchProxy():
 
         for resource in queries.keys():
             query_for_resource = queries.get(resource)
+            LOGGER.info(f"index: {get_index_for_resource(resource_type=resource)}")
             search = Search(index=get_index_for_resource(resource_type=resource)).query(query_for_resource)
 
             # pagination
