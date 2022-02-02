@@ -74,6 +74,7 @@ class UserFollowsAPITest(unittest.TestCase):
         mock_get_proxy_client.return_value = self.mock_client
         self.api = UserFollowsAPI()
 
+
     def test_get(self) -> None:
         self.mock_client.get_table_by_user_relation.return_value = {'table': []}
         self.mock_client.get_dashboard_by_user_relation.return_value = {'dashboard': []}
