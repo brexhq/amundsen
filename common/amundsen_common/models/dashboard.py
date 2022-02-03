@@ -6,6 +6,7 @@ from typing import List, Optional
 import attr
 from marshmallow3_annotations.ext.attrs import AttrsSchema
 
+# test
 
 @attr.s(auto_attribs=True, kw_only=True)
 class DashboardSummary:
