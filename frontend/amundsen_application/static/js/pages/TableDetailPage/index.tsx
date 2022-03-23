@@ -474,6 +474,7 @@ export class TableDetail extends React.Component<
                   severity={tableNotice.severity}
                 />
               )}
+              {this.renderProgrammaticDesc(data.programmatic_descriptions.top)}
               <EditableSection
                 title={Constants.DESCRIPTION_TITLE}
                 readOnly={!data.is_editable}

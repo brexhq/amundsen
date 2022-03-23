@@ -7,7 +7,7 @@ export const EDIT_OWNERS_TEXT = 'Click to edit owners in';
 
 export const COLUMN_URL_KEY = 'column';
 export const DATE_RANGE_TITLE = 'Date Range';
-export const DESCRIPTION_TITLE = 'Description';
+export const DESCRIPTION_TITLE = 'Editable Description';
 export const FREQ_USERS_TITLE = 'Frequent Users';
 export const LAST_UPDATED_TITLE = 'Last Updated';
 export const OWNERS_TITLE = 'Owners';
