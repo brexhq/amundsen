@@ -484,7 +484,7 @@ export class TableDetail extends React.Component<
                 <TableDescEditableText
                   maxLength={getMaxLength('tableDescLength')}
                   value={data.description}
-                  editable={data.is_editable}
+                  editable
                 />
                 <span>
                   {notificationsEnabled() && <RequestDescriptionText />}
