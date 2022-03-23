@@ -230,7 +230,7 @@ def _convert_prog_descriptions(prog_descriptions: List = None) -> Dict:
 
             other_config = dict(filter(lambda x: x not in ['TOP', 'LEFT', 'RIGHT'], prog_display_config.items()))
             other = list(filter(lambda x: x.get('source') not in left_config and x.get('source')
-                                not in right_config, prog_descriptions))
+                                not in right_config and x.get('source') not in top_config, prog_descriptions))
             other.sort(key=lambda x: _sort_prog_descriptions(other_config, x))
 
     updated_descriptions['top'] = top

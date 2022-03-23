@@ -477,7 +477,7 @@ export class TableDetail extends React.Component<
               {this.renderProgrammaticDesc(data.programmatic_descriptions.top)}
               <EditableSection
                 title={Constants.DESCRIPTION_TITLE}
-                readOnly={!data.is_editable}
+                readOnly={false}
                 editText={editText}
                 editUrl={editUrl || undefined}
               >
