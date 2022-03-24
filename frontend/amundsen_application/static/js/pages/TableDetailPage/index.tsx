@@ -474,14 +474,10 @@ export class TableDetail extends React.Component<
                   severity={tableNotice.severity}
                 />
               )}
-              <EditableSection title="Source Controlled Description">
-                {this.renderProgrammaticDesc(
-                  data.programmatic_descriptions.top
-                )}
-                <span>
-                  {notificationsEnabled() && <RequestDescriptionText />}
-                </span>
-              </EditableSection>
+              {this.renderProgrammaticDesc(data.programmatic_descriptions.top)}
+              <span>
+                {notificationsEnabled() && <RequestDescriptionText />}
+              </span>
               <EditableSection
                 title={Constants.DESCRIPTION_TITLE}
                 readOnly={!data.is_editable}
