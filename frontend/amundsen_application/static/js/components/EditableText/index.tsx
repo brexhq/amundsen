@@ -132,7 +132,7 @@ class EditableText extends React.Component<
               href="JavaScript:void(0)"
               onClick={this.enterEditMode}
             >
-              Add Description
+              Add Comment
             </a>
           )}
         </div>
