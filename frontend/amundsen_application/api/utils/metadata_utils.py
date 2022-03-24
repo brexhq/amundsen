@@ -198,6 +198,9 @@ def _convert_prog_descriptions(prog_descriptions: List = None) -> Dict:
     :param prog_descriptions: A list of objects representing programmatic descriptions
     :return: A dictionary with organized programmatic_descriptions
     """
+    # we want to put source controlled / github programmatic description on top
+    # for the project of editable description
+    top = []  # type: List
     left = []  # type: List
     right = []  # type: List
     other = prog_descriptions or []  # type: List
@@ -213,6 +216,10 @@ def _convert_prog_descriptions(prog_descriptions: List = None) -> Dict:
         # If config is defined for programmatic disply we organize and sort them based on the configuration
         prog_display_config = app.config['PROGRAMMATIC_DISPLAY']
         if prog_display_config:
+            top_config = prog_display_config.get('TOP', {})
+            top = [x for x in prog_descriptions if x.get('source') in top_config]
+            top.sort(key=lambda x: _sort_prog_descriptions(top_config, x))
+
             left_config = prog_display_config.get('LEFT', {})
             left = [x for x in prog_descriptions if x.get('source') in left_config]
             left.sort(key=lambda x: _sort_prog_descriptions(left_config, x))
@@ -221,11 +228,12 @@ def _convert_prog_descriptions(prog_descriptions: List = None) -> Dict:
             right = [x for x in prog_descriptions if x.get('source') in right_config]
             right.sort(key=lambda x: _sort_prog_descriptions(right_config, x))
 
-            other_config = dict(filter(lambda x: x not in ['LEFT', 'RIGHT'], prog_display_config.items()))
+            other_config = dict(filter(lambda x: x not in ['TOP', 'LEFT', 'RIGHT'], prog_display_config.items()))
             other = list(filter(lambda x: x.get('source') not in left_config and x.get('source')
-                                not in right_config, prog_descriptions))
+                                not in right_config and x.get('source') not in top_config, prog_descriptions))
             other.sort(key=lambda x: _sort_prog_descriptions(other_config, x))
 
+    updated_descriptions['top'] = top
     updated_descriptions['left'] = left
     updated_descriptions['right'] = right
     updated_descriptions['other'] = other

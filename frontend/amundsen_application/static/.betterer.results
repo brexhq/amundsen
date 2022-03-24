@@ -455,9 +455,9 @@ exports[`eslint`] = {
       [19, 2, 8, "Assignment to function parameter \'resource\'.", "2131237679"],
       [20, 2, 248, "Expected a default case.", "1034339850"]
     ],
-    "js/ducks/tableMetadata/api/v0.ts:4044823741": [
-      [80, 8, 23, "Use object destructuring.", "1142306891"],
-      [139, 23, -4311, "Expected to return a value at the end of arrow function.", "5381"]
+    "js/ducks/tableMetadata/api/v0.ts:3883541609": [
+      [81, 8, 23, "Use object destructuring.", "1142306891"],
+      [140, 23, -4387, "Expected to return a value at the end of arrow function.", "5381"]
     ],
     "js/ducks/tableMetadata/owners/index.spec.ts:655040122": [
       [15, 0, 91, "\`../reducer\` import should occur before import of \`./reducer\`", "2216296793"],
@@ -466,8 +466,8 @@ exports[`eslint`] = {
     "js/ducks/tableMetadata/owners/sagas.ts:3725515638": [
       [7, 0, 69, "\`../types\` import should occur before import of \`./reducer\`", "3326352266"]
     ],
-    "js/ducks/tableMetadata/reducer.ts:3872576896": [
-      [416, 6, 93, "Unexpected lexical declaration in case block.", "4098864482"]
+    "js/ducks/tableMetadata/reducer.ts:4228277038": [
+      [465, 6, 93, "Unexpected lexical declaration in case block.", "4098864482"]
     ],
     "js/ducks/tags/api/v0.ts:2781466514": [
       [21, 16, -605, "Expected to return a value at the end of function \'getResourceTags\'.", "5381"]
@@ -500,8 +500,8 @@ exports[`eslint`] = {
     "js/features/ColumnList/index.spec.tsx:2138919335": [
       [14, 0, 48, "\`.\` import should occur after import of \`./testDataBuilder\`", "1857255231"]
     ],
-    "js/features/ColumnList/index.tsx:3552909395": [
-      [205, 2, 871, "Arrow function expected no return value.", "1083254797"]
+    "js/features/ColumnList/index.tsx:3692785076": [
+      [205, 2, 834, "Arrow function expected no return value.", "2539797162"]
     ],
     "js/features/ExpandableUniqueValues/index.spec.tsx:2032191364": [
       [13, 0, 48, "\`./testDataBuilder\` import should occur before import of \`.\`", "3767205268"]
@@ -662,7 +662,7 @@ exports[`eslint`] = {
     "js/pages/TableDetailPage/ListSortingDropdown/index.spec.tsx:1478300175": [
       [174, 14, 34, "Use array destructuring.", "2024515814"]
     ],
-    "js/pages/TableDetailPage/ListSortingDropdown/index.tsx:461685831": [
+    "js/pages/TableDetailPage/ListSortingDropdown/index.tsx:3178023015": [
       [62, 25, 1, "\'_\' is defined but never used.", "177658"],
       [65, 14, 204, "A control must be associated with a text label.", "3622841199"]
     ],
@@ -711,7 +711,7 @@ exports[`eslint`] = {
     "js/pages/TableDetailPage/index.spec.tsx:1320221888": [
       [64, 6, 25, "Use object destructuring.", "1230260048"]
     ],
-    "js/pages/TableDetailPage/index.tsx:4211828621": [
+    "js/pages/TableDetailPage/index.tsx:2696952062": [
       [147, 2, 20, "key should be placed after componentDidUpdate", "3916788587"],
       [189, 6, 13, "Do not use setState in componentDidUpdate", "57229240"]
     ],

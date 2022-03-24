@@ -474,6 +474,10 @@ export class TableDetail extends React.Component<
                   severity={tableNotice.severity}
                 />
               )}
+              {this.renderProgrammaticDesc(data.programmatic_descriptions.top)}
+              <span>
+                {notificationsEnabled() && <RequestDescriptionText />}
+              </span>
               <EditableSection
                 title={Constants.DESCRIPTION_TITLE}
                 readOnly={!data.is_editable}
@@ -485,9 +489,6 @@ export class TableDetail extends React.Component<
                   value={data.description}
                   editable={data.is_editable}
                 />
-                <span>
-                  {notificationsEnabled() && <RequestDescriptionText />}
-                </span>
               </EditableSection>
               {issueTrackingEnabled() && (
                 <section className="metadata-section">
@@ -533,7 +534,7 @@ export class TableDetail extends React.Component<
                 <section className="right-panel">
                   <EditableSection
                     title={Constants.OWNERS_TITLE}
-                    readOnly={!data.is_editable}
+                    readOnly
                     editText={ownersEditText}
                     editUrl={editUrl || undefined}
                   >

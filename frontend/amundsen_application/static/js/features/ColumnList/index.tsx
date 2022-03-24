@@ -208,13 +208,13 @@ const ExpandedRowComponent: React.FC<ExpandedRowProps> = (
       {shouldRenderDescription() && (
         <EditableSection
           title={EDITABLE_SECTION_TITLE}
-          readOnly={!rowValue.isEditable}
+          readOnly
           editText={rowValue.editText || undefined}
           editUrl={rowValue.editUrl || undefined}
         >
           <ColumnDescEditableText
             columnIndex={rowValue.col_index}
-            editable={rowValue.isEditable}
+            editable={false}
             maxLength={getMaxLength('columnDescLength')}
             value={rowValue.content.description}
           />
