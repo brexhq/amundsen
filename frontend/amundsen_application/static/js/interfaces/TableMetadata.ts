@@ -80,6 +80,7 @@ export interface ProgrammaticDescription {
   text: string;
 }
 export interface TableProgrammaticDescriptions {
+  top?: ProgrammaticDescription[];
   left?: ProgrammaticDescription[];
   right?: ProgrammaticDescription[];
   other?: ProgrammaticDescription[];
