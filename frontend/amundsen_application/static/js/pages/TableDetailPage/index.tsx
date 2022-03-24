@@ -475,20 +475,20 @@ export class TableDetail extends React.Component<
                 />
               )}
               {this.renderProgrammaticDesc(data.programmatic_descriptions.top)}
+              <span>
+                {notificationsEnabled() && <RequestDescriptionText />}
+              </span>
               <EditableSection
                 title={Constants.DESCRIPTION_TITLE}
-                readOnly={false}
+                readOnly={!data.is_editable}
                 editText={editText}
                 editUrl={editUrl || undefined}
               >
                 <TableDescEditableText
                   maxLength={getMaxLength('tableDescLength')}
                   value={data.description}
-                  editable
+                  editable={data.is_editable}
                 />
-                <span>
-                  {notificationsEnabled() && <RequestDescriptionText />}
-                </span>
               </EditableSection>
               {issueTrackingEnabled() && (
                 <section className="metadata-section">
