@@ -474,10 +474,14 @@ export class TableDetail extends React.Component<
                   severity={tableNotice.severity}
                 />
               )}
-              {this.renderProgrammaticDesc(data.programmatic_descriptions.top)}
-              <span>
-                {notificationsEnabled() && <RequestDescriptionText />}
-              </span>
+              <EditableSection title="Source Controlled Description">
+                {this.renderProgrammaticDesc(
+                  data.programmatic_descriptions.top
+                )}
+                <span>
+                  {notificationsEnabled() && <RequestDescriptionText />}
+                </span>
+              </EditableSection>
               <EditableSection
                 title={Constants.DESCRIPTION_TITLE}
                 readOnly={!data.is_editable}
@@ -512,12 +516,6 @@ export class TableDetail extends React.Component<
                       </time>
                     </section>
                   )}
-                  <section className="metadata-section">
-                    <div className="section-title">
-                      {Constants.DATE_RANGE_TITLE}
-                    </div>
-                    <WatermarkLabel watermarks={data.watermarks} />
-                  </section>
                   <EditableSection title={Constants.TAG_TITLE}>
                     <TagInput
                       resourceType={ResourceType.table}
