@@ -76,6 +76,7 @@ import TableDashboardResourceList from './TableDashboardResourceList';
 import TableDescEditableText from './TableDescEditableText';
 import TableHeaderBullets from './TableHeaderBullets';
 import TableIssues from './TableIssues';
+import WatermarkLabel from './WatermarkLabel';
 import ApplicationDropdown from './ApplicationDropdown';
 import TableQualityChecksLabel from './TableQualityChecks';
 import TableReportsDropdown from './ResourceReportsDropdown';
@@ -511,6 +512,12 @@ export class TableDetail extends React.Component<
                       </time>
                     </section>
                   )}
+                  <section className="metadata-section">
+                    <div className="section-title">
+                      {Constants.DATE_RANGE_TITLE}
+                    </div>
+                    <WatermarkLabel watermarks={data.watermarks} />
+                  </section>
                   <EditableSection title={Constants.TAG_TITLE}>
                     <TagInput
                       resourceType={ResourceType.table}
@@ -527,7 +534,7 @@ export class TableDetail extends React.Component<
                 <section className="right-panel">
                   <EditableSection
                     title={Constants.OWNERS_TITLE}
-                    readOnly={!data.is_editable}
+                    readOnly
                     editText={ownersEditText}
                     editUrl={editUrl || undefined}
                   >

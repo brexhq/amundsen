@@ -8,8 +8,6 @@ import { Watermark } from 'interfaces';
 import { formatDate } from 'utils/dateUtils';
 import {
   HIGH_WATERMARK_LABEL,
-  NO_WATERMARK_LINE_1,
-  NO_WATERMARK_LINE_2,
   LOW_WATERMARK_LABEL,
   WATERMARK_INPUT_FORMAT,
   WatermarkType,
@@ -35,13 +33,7 @@ class WatermarkLabel extends React.Component<WatermarkLabelProps> {
 
   renderWatermarkInfo = (low: string | null, high: string | null) => {
     if (low === null && high === null) {
-      return (
-        <div className="body-2">
-          {NO_WATERMARK_LINE_1}
-          <br />
-          {NO_WATERMARK_LINE_2}
-        </div>
-      );
+      return <div className="body-2">Not Available</div>;
     }
 
     return (
