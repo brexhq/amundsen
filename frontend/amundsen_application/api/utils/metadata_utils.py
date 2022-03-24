@@ -237,7 +237,6 @@ def _convert_prog_descriptions(prog_descriptions: List = None) -> Dict:
     updated_descriptions['left'] = left
     updated_descriptions['right'] = right
     updated_descriptions['other'] = other
-    logging.info(f"updated descriptions: {updated_descriptions}")
     return updated_descriptions
 
 
