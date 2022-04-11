@@ -559,7 +559,7 @@ describe('search reducer', () => {
           ...initialState,
           features: {
             page_index: 0,
-            results: [mockFeatureResult],
+            results: [mockTableResult],
             total_results: 1,
           },
         };
