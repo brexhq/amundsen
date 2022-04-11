@@ -21,7 +21,7 @@ export interface SearchResults<T extends Resource> {
   results: T[];
 }
 export type DashboardSearchResults = SearchResults<DashboardResource>;
-export type FeatureSearchResults = SearchResults<FeatureResource>;
+export type FeatureSearchResults = SearchResults<TableResource>;
 export type TableSearchResults = SearchResults<TableResource>;
 export type UserSearchResults = SearchResults<UserResource>;
 

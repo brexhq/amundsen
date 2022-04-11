@@ -37,8 +37,8 @@ export default class ResourceListItem extends React.Component<ListItemProps> {
         );
       case ResourceType.feature:
         return (
-          <FeatureListItem
-            feature={this.props.item as FeatureResource}
+          <TableListItem
+            table={this.props.item as TableResource}
             logging={this.props.logging}
           />
         );

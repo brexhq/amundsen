@@ -29,7 +29,7 @@ SEARCH_ENDPOINT = '/v2/search'
 RESOURCE_TO_MAPPING = {
     'table': map_table_result,
     'dashboard': map_dashboard_result,
-    'feature': map_feature_result,
+    'feature': map_table_result,
     'user': map_user_result,
 }
 
