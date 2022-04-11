@@ -55,7 +55,7 @@ describe('ResourceListItem', () => {
       subject.setProps(props);
       expect(subject.find(TableListItem).props()).toMatchObject({
         logging: props.logging,
-        feature: props.item,
+        table: props.item,
       });
     });
 
