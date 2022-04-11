@@ -2,7 +2,6 @@ import { Search as UrlSearch } from 'history';
 
 import {
   DashboardResource,
-  FeatureResource,
   Resource,
   ResourceType,
   SearchType,

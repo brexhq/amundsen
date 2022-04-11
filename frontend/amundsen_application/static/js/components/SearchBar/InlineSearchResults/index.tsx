@@ -25,7 +25,6 @@ import {
   Resource,
   ResourceType,
   DashboardResource,
-  FeatureResource,
   TableResource,
   UserResource,
 } from 'interfaces';
@@ -136,6 +135,7 @@ export class InlineSearchResults extends React.Component<
         return `${buildDashboardURL(dashboard.uri)}?${logParams}`;
       case ResourceType.feature:
         const feature = result as TableResource;
+
         return `/table_detail/${feature.cluster}/${feature.database}/${feature.schema}/${feature.name}?${logParams}`;
       case ResourceType.table:
         const table = result as TableResource;
@@ -233,7 +233,6 @@ export class InlineSearchResults extends React.Component<
     resourceType: ResourceType,
     result: Resource
   ): string => {
-    const source = '';
     switch (resourceType) {
       case ResourceType.dashboard:
         const dashboard = result as DashboardResource;

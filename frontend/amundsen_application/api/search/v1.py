@@ -17,7 +17,7 @@ from amundsen_application.log.action_log import action_logging
 from amundsen_application.api.utils.request_utils import (get_query_param,
                                                           request_search)
 from amundsen_application.api.utils.search_utils import (
-    generate_query_request, map_dashboard_result, map_feature_result,
+    generate_query_request, map_dashboard_result,
     map_table_result, map_user_result)
 
 LOGGER = logging.getLogger(__name__)

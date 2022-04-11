@@ -7,14 +7,12 @@ import {
   Resource,
   ResourceType,
   DashboardResource,
-  FeatureResource,
   TableResource,
   UserResource,
 } from 'interfaces';
 
 import { LoggingParams } from './types';
 import DashboardListItem from './DashboardListItem';
-import FeatureListItem from './FeatureListItem';
 import TableListItem from './TableListItem';
 import UserListItem from './UserListItem';
 
