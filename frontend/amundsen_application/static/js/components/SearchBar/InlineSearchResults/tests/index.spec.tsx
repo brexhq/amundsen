@@ -10,7 +10,6 @@ import { SearchResults } from 'ducks/search/types';
 import {
   ResourceType,
   DashboardResource,
-  FeatureResource,
   TableResource,
   UserResource,
 } from 'interfaces';
