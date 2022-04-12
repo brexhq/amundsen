@@ -43,7 +43,14 @@ def _transform_filters(filters: Dict, resources: List[str]) -> List[Filter]:
     searched_resources_with_filters = set(filters.keys()).intersection(resources)
     for resource in searched_resources_with_filters:
         resource_filters = filters[resource]
+
         for field in resource_filters.keys():
+            # <Brex>
+            if field in ['source', 'database', 'schema', 'version', 'freshness']:
+                transformed_filters.append(_brex_custom_filter(field, resource_filters[field]))
+                continue
+            # </Brex>
+
             field_filters = resource_filters[field]
             values = []
             filter_operation = DEFAULT_FILTER_OPERATION
@@ -58,6 +65,33 @@ def _transform_filters(filters: Dict, resources: List[str]) -> List[Filter]:
                                               operation=filter_operation))
 
     return transformed_filters
+
+
+def _brex_custom_filter(field: str, field_filters: Dict[str, str]) -> Filter:
+    """
+    We need the custom filter as we put db@schema into schema field for tables,
+    and put version@freshness into schema field for fractal features.
+
+    Introducing this custom filter helps users with the advanced search page
+    """
+    values = []
+    filter_operation = DEFAULT_FILTER_OPERATION
+
+    if field_filters is not None and field_filters.get('value') is not None:
+        value_str = field_filters.get('value')
+        values = [str.strip() for str in value_str.split(',') if str != '']
+        filter_operation = field_filters.get('filterOperation', DEFAULT_FILTER_OPERATION)
+
+    if field == 'source':
+        return Filter(name='database', values=values, operation=filter_operation)
+    elif field in ['database', 'version']:
+        values = [f'{v}@*' for v in values]
+        return Filter(name='schema', values=values, operation=filter_operation)
+    elif field == ['schema', 'freshness']:
+        values = [f'*@{v}' for v in values]
+        return Filter(name='schema', values=values, operation=filter_operation)
+
+    return Filter(name=field, values=values, operation=filter_operation)
 
 
 @search_blueprint.route('/search', methods=['POST'])
