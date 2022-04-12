@@ -145,7 +145,7 @@ class Search(unittest.TestCase):
         self.assertEqual(actual, expected)
 
         test_fractal_feature_filters = {
-            "table": {
+            "feature": {
                 "version": {
                     "value": "test_version",
                     "operation": "OR"
