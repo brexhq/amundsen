@@ -77,9 +77,9 @@ def _brex_custom_filter(field: str, field_filters: Dict[str, str]) -> Filter:
     values = []
     filter_operation = DEFAULT_FILTER_OPERATION
 
-    if field_filters is not None and field_filters.get('value') is not None:
+    if field_filters and field_filters.get('value'):
         value_str = field_filters.get('value')
-        values = [str.strip() for str in value_str.split(',') if str != '']
+        values = [v.strip() for v in value_str.split(',') if v != '']
         filter_operation = field_filters.get('filterOperation', DEFAULT_FILTER_OPERATION)
 
     if field == 'source':
