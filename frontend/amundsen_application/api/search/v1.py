@@ -46,7 +46,7 @@ def _transform_filters(filters: Dict, resources: List[str]) -> List[Filter]:
 
         for field in resource_filters.keys():
             # <Brex>
-            if field in ['source', 'database', 'schema', 'version', 'freshness']:
+            if field in ['source', 'dbname', 'schemaname', 'version', 'freshness']:
                 transformed_filters.append(_brex_custom_filter(field, resource_filters[field]))
                 continue
             # </Brex>
@@ -84,10 +84,10 @@ def _brex_custom_filter(field: str, field_filters: Dict[str, str]) -> Filter:
 
     if field == 'source':
         return Filter(name='database', values=values, operation=filter_operation)
-    elif field in ['db', 'version']:
+    elif field in ['dbname', 'version']:
         values = [f'{v}@*' for v in values]
         return Filter(name='schema', values=values, operation=filter_operation)
-    elif field in ['schema', 'freshness']:
+    elif field in ['schemaname', 'freshness']:
         values = [f'*@{v}' for v in values]
         return Filter(name='schema', values=values, operation=filter_operation)
 
