@@ -84,7 +84,7 @@ def _brex_custom_filter(field: str, field_filters: Dict[str, str]) -> Filter:
 
     if field == 'source':
         return Filter(name='database', values=values, operation=filter_operation)
-    elif field in ['database', 'version']:
+    elif field in ['db', 'version']:
         values = [f'{v}@*' for v in values]
         return Filter(name='schema', values=values, operation=filter_operation)
     elif field in ['schema', 'freshness']:
