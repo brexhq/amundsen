@@ -1,6 +1,9 @@
 // Copyright Contributors to the Amundsen project.
 // SPDX-License-Identifier: Apache-2.0
 
+import { ResourceType } from 'interfaces/Resources';
+import AppConfig from 'config/config-types';
+
 export enum CaseType {
   LOWER_CASE = 'lowerCase',
   SENTENCE_CASE = 'sentenceCase',
@@ -26,4 +29,8 @@ export function convertText(str = '', caseType: CaseType | null): string {
     default:
       return str;
   }
+}
+
+export function convertFeatureSchema(schema: string): string {
+  return schema.replace('@', '.');
 }

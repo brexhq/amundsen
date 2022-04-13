@@ -277,6 +277,9 @@ class ElasticsearchProxy():
             else:
                 raise InternalServerError(f"Request to Elasticsearch failed: {r.failures}")
 
+        LOGGER.info("results_per_resource")
+        LOGGER.info(results_per_resource)
+
         return SearchResponse(msg="Success",
                               page_index=page_index,
                               results_per_page=results_per_page,

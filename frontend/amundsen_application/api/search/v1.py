@@ -180,6 +180,8 @@ def _search_resources(*, search_term: str,
             results_dict['msg'] = message
 
         results_dict['status_code'] = status_code
+        LOGGER.info("results_dict")
+        LOGGER.info(results_dict)
         return results_dict
 
     except Exception as e:
