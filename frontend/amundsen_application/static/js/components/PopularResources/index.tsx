@@ -10,7 +10,7 @@ import PaginatedResourceList from 'components/ResourceList/PaginatedResourceList
 import TabsComponent, { TabInfo } from 'components/TabsComponent';
 import ShimmeringResourceLoader from 'components/ShimmeringResourceLoader';
 import {
-  getDisplayNameByResource,
+  getCustomDisplayNameByResource,
   indexDashboardsEnabled,
 } from 'config/config-utils';
 
@@ -52,13 +52,7 @@ const generateTabTitle = (
     return '';
   }
 
-  const resourceDisplayName = getDisplayNameByResource(resource);
-  const convertedResourceDisplayName =
-    resourceDisplayName === 'Datasets'
-      ? 'Datasets / Fractal Features'
-      : resourceDisplayName;
-
-  return `${convertedResourceDisplayName} (${resources.length})`;
+  return `${getCustomDisplayNameByResource(resource)} (${resources.length})`;
 };
 
 export class PopularResources extends React.Component<PopularResourcesProps> {

@@ -146,6 +146,18 @@ export function getDisplayNameByResource(resourceType: ResourceType): string {
 }
 
 /**
+ * Returns the displayName for the given resourceType
+ */
+export function getCustomDisplayNameByResource(
+  resourceType: ResourceType
+): string {
+  const resourceDisplayName = getDisplayNameByResource(resourceType);
+  return resourceDisplayName === 'Datasets'
+    ? 'Datasets / Fractal Features'
+    : resourceDisplayName;
+}
+
+/**
  * Returns the filterCategories for the given resourceType
  */
 export function getFilterConfigByResource(

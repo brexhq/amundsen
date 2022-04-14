@@ -8,7 +8,7 @@ import { GlobalState } from 'ducks/rootReducer';
 
 import { Bookmark, ResourceType, ResourceDict } from 'interfaces';
 import {
-  getDisplayNameByResource,
+  getCustomDisplayNameByResource,
   indexDashboardsEnabled,
 } from 'config/config-utils';
 import PaginatedResourceList from 'components/ResourceList/PaginatedResourceList';
@@ -57,13 +57,7 @@ export class MyBookmarks extends React.Component<MyBookmarksProps> {
       return '';
     }
 
-    const resourceDisplayName = getDisplayNameByResource(resource);
-    const convertedResourceDisplayName =
-      resourceDisplayName === 'Datasets'
-        ? 'Datasets / Fractal Features'
-        : resourceDisplayName;
-
-    return `${convertedResourceDisplayName} (${bookmarks.length})`;
+    return `${getCustomDisplayNameByResource(resource)} (${bookmarks.length})`;
   };
 
   generateTabInfo = (): TabInfo[] => {
