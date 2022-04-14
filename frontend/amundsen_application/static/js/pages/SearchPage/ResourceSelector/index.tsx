@@ -87,6 +87,14 @@ export class ResourceSelector extends React.Component<ResourceSelectorProps> {
       },
     ];
 
+    if (indexFeaturesEnabled()) {
+      resourceOptions.push({
+        type: ResourceType.feature,
+        label: FEATURE_RESOURCE_TITLE,
+        count: this.props.features.total_results,
+      });
+    }
+
     if (indexDashboardsEnabled()) {
       resourceOptions.push({
         type: ResourceType.dashboard,
@@ -100,14 +108,6 @@ export class ResourceSelector extends React.Component<ResourceSelectorProps> {
         type: ResourceType.user,
         label: USER_RESOURCE_TITLE,
         count: this.props.users.total_results,
-      });
-    }
-
-    if (indexFeaturesEnabled()) {
-      resourceOptions.push({
-        type: ResourceType.feature,
-        label: FEATURE_RESOURCE_TITLE,
-        count: this.props.features.total_results,
       });
     }
 

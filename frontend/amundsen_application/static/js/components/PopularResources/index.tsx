@@ -52,7 +52,13 @@ const generateTabTitle = (
     return '';
   }
 
-  return `${getDisplayNameByResource(resource)} (${resources.length})`;
+  const resourceDisplayName = getDisplayNameByResource(resource);
+  const convertedResourceDisplayName =
+    resourceDisplayName === 'Datasets'
+      ? 'Datasets / Fractal Features'
+      : resourceDisplayName;
+
+  return `${convertedResourceDisplayName} (${resources.length})`;
 };
 
 export class PopularResources extends React.Component<PopularResourcesProps> {

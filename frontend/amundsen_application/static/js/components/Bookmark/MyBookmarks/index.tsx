@@ -57,7 +57,13 @@ export class MyBookmarks extends React.Component<MyBookmarksProps> {
       return '';
     }
 
-    return `${getDisplayNameByResource(resource)} (${bookmarks.length})`;
+    const resourceDisplayName = getDisplayNameByResource(resource);
+    const convertedResourceDisplayName =
+      resourceDisplayName === 'Datasets'
+        ? 'Datasets / Fractal Features'
+        : resourceDisplayName;
+
+    return `${convertedResourceDisplayName} (${bookmarks.length})`;
   };
 
   generateTabInfo = (): TabInfo[] => {
