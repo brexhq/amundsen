@@ -68,9 +68,20 @@ def _transform_filters(filters: Dict, resources: List[str]) -> List[Filter]:
 
 def _brex_custom_filter(field: str, field_filters: Dict[str, str]) -> Filter:
     """
+    Introducing custom filters helps users with the advanced search page.
+
     We need the custom filter as we put db@schema into schema field for tables,
     and put version@freshness into schema field for fractal features.
-    Introducing this custom filter helps users with the advanced search page
+
+    With these custom filters, we have
+    for table advanced search page:
+        1. a dedicated box for source (snowflake or postgres)
+        2. a dedicated box for database (e.g, coredata, acquirer)
+        3. a dedicated box for schema (e.g, public)
+
+    for feature advanced search page:
+        1. a dedicated box for version (eg, 0, 1)
+        2. a dedicated box for freshness (e.g, daily)
     """
     values = []
     filter_operation = DEFAULT_FILTER_OPERATION
