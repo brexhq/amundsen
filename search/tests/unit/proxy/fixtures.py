@@ -389,7 +389,7 @@ RESPONSE_2 = [
         },
         "hits": {
             "total": {
-                "value": 3,
+                "value": 2,
                 "relation": "eq"
             },
             "max_score": 62.66787,
