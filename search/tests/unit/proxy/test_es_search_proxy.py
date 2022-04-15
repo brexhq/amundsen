@@ -256,4 +256,5 @@ class TestElasticsearchProxy(unittest.TestCase):
                                       }
                                   },
                                   status_code=200)
+
         self.assertEqual(formatted_response, expected)
