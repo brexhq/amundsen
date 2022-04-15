@@ -28,6 +28,6 @@ export function convertText(str = '', caseType: CaseType | null): string {
   }
 }
 
-export function convertFeatureSchema(schema: string): string {
+export function convertSchemaField(schema: string): string {
   return schema.replace('@', '.');
 }

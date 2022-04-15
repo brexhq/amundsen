@@ -12,7 +12,7 @@ import {
   indexUsersEnabled,
 } from 'config/config-utils';
 import { buildDashboardURL } from 'utils/navigationUtils';
-import { convertFeatureSchema } from 'utils/textUtils';
+import { convertSchemaField } from 'utils/textUtils';
 
 import { GlobalState } from 'ducks/rootReducer';
 import {
@@ -213,7 +213,7 @@ export class InlineSearchResults extends React.Component<
         const feature = result as TableResource;
         return (
           <div className="text-title-w2 truncated">
-            {`${feature.name}.${convertFeatureSchema(feature.schema)}`}
+            {`${feature.name}.${convertSchemaField(feature.schema)}`}
           </div>
         );
       case ResourceType.table:

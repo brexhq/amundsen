@@ -13,7 +13,7 @@ import { getSourceDisplayName, getSourceIconClass } from 'config/config-utils';
 import BadgeList from 'features/BadgeList';
 import SchemaInfo from 'components/ResourceListItem/SchemaInfo';
 import { logClick } from 'utils/analytics';
-import { convertFeatureSchema } from 'utils/textUtils';
+import { convertSchemaField } from 'utils/textUtils';
 import { LoggingParams } from '../types';
 
 export interface TableListItemProps {
@@ -47,7 +47,7 @@ const TableListItem: React.FC<TableListItemProps> = ({ table, logging }) => (
           <div className="resource-name">
             <div className="truncated">
               {table.database === 'feature' &&
-                `${table.name}.${convertFeatureSchema(table.schema)}`}
+                `${table.name}.${convertSchemaField(table.schema)}`}
               {table.database !== 'feature' && table.schema_description && (
                 <SchemaInfo
                   schema={table.schema}

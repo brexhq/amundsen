@@ -53,7 +53,7 @@ import {
   setUrlParam,
   TablePageParams,
 } from 'utils/navigationUtils';
-import { convertFeatureSchema } from 'utils/textUtils';
+import { convertSchemaField } from 'utils/textUtils';
 
 import {
   ProgrammaticDescription,
@@ -419,7 +419,7 @@ export class TableDetail extends React.Component<
         `${data.cluster}.${data.database}.${data.schema}.${data.name}`
       );
 
-      const featureVersionFreshness = convertFeatureSchema(data.schema);
+      const featureVersionFreshness = convertSchemaField(data.schema);
       innerContent = (
         <div className="resource-detail-layout table-detail">
           {notificationsEnabled() && <RequestMetadataForm />}
