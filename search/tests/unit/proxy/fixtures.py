@@ -431,7 +431,7 @@ RESPONSE_2 = [
                         ],
                         "total_usage": 74841,
                         "unique_usage": 457,
-                        "resource_type": "table"
+                        "resource_type": "feature"
                     }
                 },
                 {
@@ -468,7 +468,7 @@ RESPONSE_2 = [
                         ],
                         "total_usage": 4715,
                         "unique_usage": 254,
-                        "resource_type": "table"
+                        "resource_type": "feature"
                     }
                 }
             ]

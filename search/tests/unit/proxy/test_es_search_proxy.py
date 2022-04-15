@@ -228,7 +228,7 @@ class TestElasticsearchProxy(unittest.TestCase):
                                                   "database": "mock_db",
                                                   "cluster": "mock_cluster",
                                                   "search_score": 62.66787,
-                                                  "resource_type": "table"
+                                                  "resource_type": "feature"
                                               },
                                               {
                                                   "key": "mock_db://mock_cluster.mock_schema/mock_table_2",
@@ -249,7 +249,7 @@ class TestElasticsearchProxy(unittest.TestCase):
                                                   "database": "mock_db",
                                                   "cluster": "mock_cluster",
                                                   "search_score": 62.66787,
-                                                  "resource_type": "table"
+                                                  "resource_type": "feature"
                                               }
                                           ],
                                           "total_results": 2
