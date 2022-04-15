@@ -25,15 +25,9 @@ class TestElasticsearchProxy(unittest.TestCase):
 
     def test_build_elasticsearch_query_term_filters(self) -> None:
         actual = self.es_proxy._build_elasticsearch_query(resource=Resource.FEATURE,
-                                                          query_term="mock_feature",
-                                                          filters=[
-                                                              Filter(name='badges',
-                                                                     values=['pii'],
-                                                                     operation='AND'),
-                                                              Filter(name='feature_group',
-                                                                     values=['test_group', 'mock_group'],
-                                                                     operation='OR')])
-        expected = TERM_FILTERS_QUERY
+                                                          query_term="mock_table",
+                                                          filters=[])
+        expected = TERM_QUERY
 
         self.assertDictEqual(actual.to_dict(), expected)
 
@@ -213,51 +207,52 @@ class TestElasticsearchProxy(unittest.TestCase):
                                       "feature": {
                                           "results": [
                                               {
-                                                  "key": "none/feature_1/1",
-                                                  "feature_group": "fg_2",
-                                                  "feature_name": "feature_1",
-                                                  "description": "mock feature description",
-                                                  "entity": None,
-                                                  "status": "active",
-                                                  "version": 1,
-                                                  "availability": None,
-                                                  "tags": [],
-                                                  "badges": [],
-                                                  "search_score": 62.66787,
-                                                  "resource_type": "feature"
-                                              },
-                                              {
-                                                  "key": "fg_2/feature_2/1",
-                                                  "feature_group": "fg_2",
-                                                  "feature_name": "feature_2",
-                                                  "description": "mock feature description",
-                                                  "entity": None,
-                                                  "status": "active",
-                                                  "version": 1,
-                                                  "availability": None,
-                                                  "tags": [],
-                                                  "badges": [],
-                                                  "search_score": 62.66787,
-                                                  "resource_type": "feature"
-                                              },
-                                              {
-                                                  "key": "fg_3/feature_3/2",
-                                                  "feature_group": "fg_3",
-                                                  "feature_name": "feature_3",
-                                                  "description": "mock feature description",
-                                                  "entity": None,
-                                                  "status": "active",
-                                                  "version": 2,
-                                                  "availability": None,
-                                                  "tags": [],
+                                                  "key": "mock_db://mock_cluster.mock_schema/mock_table_1",
+                                                  "description": "mock table description",
                                                   "badges": [
-                                                      "pii"
+                                                      "pii",
+                                                      "beta"
                                                   ],
+                                                  "tag": [
+                                                      "mock_tag_1",
+                                                      "mock_tag_2",
+                                                      "mock_tag_3"
+                                                  ],
+                                                  "schema": "mock_schema",
+                                                  "table": "mock_table_1",
+                                                  "column": [
+                                                      "mock_col_1",
+                                                      "mock_col_2",
+                                                      "mock_col_3"
+                                                  ],
+                                                  "database": "mock_db",
+                                                  "cluster": "mock_cluster",
                                                   "search_score": 62.66787,
-                                                  "resource_type": "feature"
+                                                  "resource_type": "table"
+                                              },
+                                              {
+                                                  "key": "mock_db://mock_cluster.mock_schema/mock_table_2",
+                                                  "description": "mock table description",
+                                                  "badges": [],
+                                                  "tag": [
+                                                      "mock_tag_4",
+                                                      "mock_tag_5",
+                                                      "mock_tag_6"
+                                                  ],
+                                                  "schema": "mock_schema",
+                                                  "table": "mock_table_2",
+                                                  "column": [
+                                                      "mock_col_1",
+                                                      "mock_col_2",
+                                                      "mock_col_3"
+                                                  ],
+                                                  "database": "mock_db",
+                                                  "cluster": "mock_cluster",
+                                                  "search_score": 62.66787,
+                                                  "resource_type": "table"
                                               }
                                           ],
-                                          "total_results": 3
+                                          "total_results": 2
                                       }
                                   },
                                   status_code=200)
