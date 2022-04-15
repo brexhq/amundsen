@@ -118,6 +118,52 @@ class Search(unittest.TestCase):
                            operation='OR')]
         self.assertEqual(actual, expected)
 
+    def test_brex_custom_filter(self) -> None:
+        test_db_filters = {
+            "table": {
+                "source": {
+                    "value": "test_source",
+                    "operation": "OR"
+                },
+                "dbname": {
+                    "value": "test_db1, test_db2",
+                    "operation": "OR"
+                },
+                "schemaname": {
+                    "value": "test_schema",
+                    "operation": "OR"
+                },
+            }
+        }
+        test_resources = ['table']
+        actual = _transform_filters(filters=test_db_filters, resources=test_resources)
+        expected = [
+            Filter(name='database', values=['test_source'], operation='OR'),
+            Filter(name='schema', values=['test_db1@*', 'test_db2@*'], operation='OR'),
+            Filter(name='schema', values=['*@test_schema'], operation='OR'),
+        ]
+        self.assertEqual(actual, expected)
+
+        test_fractal_feature_filters = {
+            "feature": {
+                "version": {
+                    "value": "test_version",
+                    "operation": "OR"
+                },
+                "freshness": {
+                    "value": "test_freshness",
+                    "operation": "OR"
+                },
+            }
+        }
+        test_resources = ['feature']
+        actual = _transform_filters(filters=test_fractal_feature_filters, resources=test_resources)
+        expected = [
+            Filter(name='schema', values=['test_version@*'], operation='OR'),
+            Filter(name='schema', values=['*@test_freshness'], operation='OR'),
+        ]
+        self.assertEqual(actual, expected)
+
     @responses.activate
     @patch('amundsen_application.api.search.v1._transform_filters')
     def test_calls_transform_filters(self, transform_filter_mock: Mock) -> None:
