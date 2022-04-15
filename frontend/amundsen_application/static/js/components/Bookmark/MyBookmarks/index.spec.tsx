@@ -19,7 +19,7 @@ import {
 import { MyBookmarks, MyBookmarksProps, mapStateToProps } from '.';
 
 jest.mock('config/config-utils', () => ({
-  getDisplayNameByResource: jest.fn(() => 'Resource'),
+  getCustomDisplayNameByResource: jest.fn(() => 'Resource'),
   indexDashboardsEnabled: jest.fn(),
 }));
 
