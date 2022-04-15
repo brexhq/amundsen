@@ -211,9 +211,10 @@ export class InlineSearchResults extends React.Component<
         );
       case ResourceType.feature:
         const feature = result as TableResource;
-        const featureVersionFreshness = convertFeatureSchema(feature.schema);
         return (
-          <div className="text-title-w2 truncated">{`${feature.name}.${featureVersionFreshness}`}</div>
+          <div className="text-title-w2 truncated">
+            {`${feature.name}.${convertFeatureSchema(feature.schema)}`}
+          </div>
         );
       case ResourceType.table:
         const table = result as TableResource;
