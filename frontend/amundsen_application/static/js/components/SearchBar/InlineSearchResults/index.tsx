@@ -12,6 +12,7 @@ import {
   indexUsersEnabled,
 } from 'config/config-utils';
 import { buildDashboardURL } from 'utils/navigationUtils';
+import { convertFeatureSchema } from 'utils/textUtils';
 
 import { GlobalState } from 'ducks/rootReducer';
 import {
@@ -210,7 +211,7 @@ export class InlineSearchResults extends React.Component<
         );
       case ResourceType.feature:
         const feature = result as TableResource;
-        const featureVersionFreshness = feature.schema.replace('@', '.');
+        const featureVersionFreshness = convertFeatureSchema(feature.schema);
         return (
           <div className="text-title-w2 truncated">{`${feature.name}.${featureVersionFreshness}`}</div>
         );
