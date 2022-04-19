@@ -12,6 +12,7 @@ import {
   indexUsersEnabled,
 } from 'config/config-utils';
 import { buildDashboardURL } from 'utils/navigationUtils';
+import { convertSchemaField } from 'utils/textUtils';
 
 import { GlobalState } from 'ducks/rootReducer';
 import {
@@ -25,7 +26,6 @@ import {
   Resource,
   ResourceType,
   DashboardResource,
-  FeatureResource,
   TableResource,
   UserResource,
 } from 'interfaces';
@@ -135,8 +135,9 @@ export class InlineSearchResults extends React.Component<
 
         return `${buildDashboardURL(dashboard.uri)}?${logParams}`;
       case ResourceType.feature:
-        const feature = result as FeatureResource;
-        return `/feature/${feature.feature_group}/${feature.name}/${feature.version}?${logParams}`;
+        const feature = result as TableResource;
+
+        return `/table_detail/${feature.cluster}/${feature.database}/${feature.schema}/${feature.name}?${logParams}`;
       case ResourceType.table:
         const table = result as TableResource;
 
@@ -154,18 +155,13 @@ export class InlineSearchResults extends React.Component<
     resourceType: ResourceType,
     result: Resource
   ): string => {
-    let source = '';
     switch (resourceType) {
       case ResourceType.dashboard:
         const dashboard = result as DashboardResource;
         return getSourceIconClass(dashboard.product, resourceType);
       case ResourceType.feature:
-        const feature = result as FeatureResource;
-        if (feature.availability) {
-          source =
-            feature.availability.length > 0 ? feature.availability[0] : '';
-        }
-        return getSourceIconClass(source, resourceType);
+        const feature = result as TableResource;
+        return getSourceIconClass(feature.database, resourceType);
       case ResourceType.table:
         const table = result as TableResource;
         return getSourceIconClass(table.database, resourceType);
@@ -185,7 +181,7 @@ export class InlineSearchResults extends React.Component<
         const dashboard = result as DashboardResource;
         return dashboard.description;
       case ResourceType.feature:
-        const feature = result as FeatureResource;
+        const feature = result as TableResource;
         return feature.description;
       case ResourceType.table:
         const table = result as TableResource;
@@ -214,10 +210,10 @@ export class InlineSearchResults extends React.Component<
           </div>
         );
       case ResourceType.feature:
-        const feature = result as FeatureResource;
+        const feature = result as TableResource;
         return (
           <div className="text-title-w2 truncated">
-            {`${feature.feature_group}.${feature.name}`}
+            {`${feature.name}.${convertSchemaField(feature.schema)}`}
           </div>
         );
       case ResourceType.table:
@@ -239,18 +235,13 @@ export class InlineSearchResults extends React.Component<
     resourceType: ResourceType,
     result: Resource
   ): string => {
-    let source = '';
     switch (resourceType) {
       case ResourceType.dashboard:
         const dashboard = result as DashboardResource;
         return getSourceDisplayName(dashboard.product, resourceType);
       case ResourceType.feature:
-        const feature = result as FeatureResource;
-        if (feature.availability) {
-          source =
-            feature.availability.length > 0 ? feature.availability[0] : '';
-        }
-        return getSourceDisplayName(source, resourceType);
+        const feature = result as TableResource;
+        return getSourceDisplayName(feature.database, resourceType);
       case ResourceType.table:
         const table = result as TableResource;
         return getSourceDisplayName(table.database, resourceType);

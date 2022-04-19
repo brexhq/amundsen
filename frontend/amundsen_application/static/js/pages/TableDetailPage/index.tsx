@@ -53,6 +53,7 @@ import {
   setUrlParam,
   TablePageParams,
 } from 'utils/navigationUtils';
+import { convertSchemaField } from 'utils/textUtils';
 
 import {
   ProgrammaticDescription,
@@ -418,6 +419,7 @@ export class TableDetail extends React.Component<
         `${data.cluster}.${data.database}.${data.schema}.${data.name}`
       );
 
+      const featureVersionFreshness = convertSchemaField(data.schema);
       innerContent = (
         <div className="resource-detail-layout table-detail">
           {notificationsEnabled() && <RequestMetadataForm />}
@@ -432,15 +434,25 @@ export class TableDetail extends React.Component<
               />
             </div>
             <div className="header-section header-title">
-              <h1
-                className="header-title-text truncated"
-                title={`${data.schema}.${data.name}`}
-              >
-                <Link to="/search" onClick={this.handleClick}>
-                  {data.schema}
-                </Link>
-                .{data.name}
-              </h1>
+              {data.database === 'feature' && (
+                <h1
+                  className="header-title-text truncated"
+                  title={`${data.schema}.${data.name}`}
+                >
+                  {data.name}.{featureVersionFreshness}
+                </h1>
+              )}
+              {data.database !== 'feature' && (
+                <h1
+                  className="header-title-text truncated"
+                  title={`${data.schema}.${data.name}`}
+                >
+                  <Link to="/search" onClick={this.handleClick}>
+                    {data.schema}
+                  </Link>
+                  .{data.name}
+                </h1>
+              )}
               <BookmarkIcon
                 bookmarkKey={data.key}
                 resourceType={ResourceType.table}

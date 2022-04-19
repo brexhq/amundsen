@@ -27,3 +27,7 @@ export function convertText(str = '', caseType: CaseType | null): string {
       return str;
   }
 }
+
+export function convertSchemaField(schema: string): string {
+  return schema.replace('@', '.');
+}

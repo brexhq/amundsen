@@ -47,7 +47,12 @@ export class TableHeaderBullets extends React.Component<TableHeaderBulletsProps>
     const isViewCheck = isView === undefined ? false : isView;
     return (
       <ul className="header-bullets">
-        <li>{getDisplayNameByResource(ResourceType.table)}</li>
+        {database === 'feature' && (
+          <li>{getDisplayNameByResource(ResourceType.feature)}</li>
+        )}
+        {database !== 'feature' && (
+          <li>{getDisplayNameByResource(ResourceType.table)}</li>
+        )}
         <li>
           <Link to="/search" onClick={this.handleClick}>
             {getSourceDisplayName(database || '', ResourceType.table)}

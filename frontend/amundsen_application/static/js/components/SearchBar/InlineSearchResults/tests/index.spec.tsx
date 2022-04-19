@@ -10,7 +10,6 @@ import { SearchResults } from 'ducks/search/types';
 import {
   ResourceType,
   DashboardResource,
-  FeatureResource,
   TableResource,
   UserResource,
 } from 'interfaces';
@@ -46,7 +45,7 @@ describe('InlineSearchResults', () => {
     const props: InlineSearchResultsProps = {
       isLoading: false,
       dashboards: allResourcesExample.dashboards as SearchResults<DashboardResource>,
-      features: allResourcesExample.features as SearchResults<FeatureResource>,
+      features: allResourcesExample.tables as SearchResults<TableResource>,
       tables: allResourcesExample.tables as SearchResults<TableResource>,
       users: allResourcesExample.users as SearchResults<UserResource>,
       className: 'testClass',

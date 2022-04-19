@@ -7,7 +7,6 @@ import { shallow } from 'enzyme';
 
 import { ResourceType } from 'interfaces';
 import DashboardListItem from './DashboardListItem';
-import FeatureListItem from './FeatureListItem';
 import TableListItem from './TableListItem';
 import UserListItem from './UserListItem';
 import ResourceListItem, { ListItemProps } from '.';
@@ -54,9 +53,9 @@ describe('ResourceListItem', () => {
     it('renders FeatureListItem with correct props', () => {
       props.item.type = ResourceType.feature;
       subject.setProps(props);
-      expect(subject.find(FeatureListItem).props()).toMatchObject({
+      expect(subject.find(TableListItem).props()).toMatchObject({
         logging: props.logging,
-        feature: props.item,
+        table: props.item,
       });
     });
 

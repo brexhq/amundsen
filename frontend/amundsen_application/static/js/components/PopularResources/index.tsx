@@ -10,7 +10,7 @@ import PaginatedResourceList from 'components/ResourceList/PaginatedResourceList
 import TabsComponent, { TabInfo } from 'components/TabsComponent';
 import ShimmeringResourceLoader from 'components/ShimmeringResourceLoader';
 import {
-  getDisplayNameByResource,
+  getCustomDisplayNameByResource,
   indexDashboardsEnabled,
 } from 'config/config-utils';
 
@@ -52,7 +52,7 @@ const generateTabTitle = (
     return '';
   }
 
-  return `${getDisplayNameByResource(resource)} (${resources.length})`;
+  return `${getCustomDisplayNameByResource(resource)} (${resources.length})`;
 };
 
 export class PopularResources extends React.Component<PopularResourcesProps> {

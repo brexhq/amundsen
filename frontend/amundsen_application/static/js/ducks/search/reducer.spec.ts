@@ -1,6 +1,5 @@
 import {
   DashboardResource,
-  FeatureResource,
   ResourceType,
   SearchType,
   TableResource,
@@ -83,18 +82,6 @@ describe('search reducer', () => {
     uri: 'uri',
     url: 'url',
     type: ResourceType.dashboard,
-  };
-
-  const mockFeatureResult: FeatureResource = {
-    key: 'key',
-    name: 'testName',
-    version: 'v0',
-    availability: [],
-    entity: 'entity',
-    description: 'I have a lot of users',
-    feature_group: 'featureGroup',
-    badges: [],
-    type: ResourceType.feature,
   };
 
   const mockUserResult: UserResource = {
@@ -559,7 +546,7 @@ describe('search reducer', () => {
           ...initialState,
           features: {
             page_index: 0,
-            results: [mockFeatureResult],
+            results: [mockTableResult],
             total_results: 1,
           },
         };

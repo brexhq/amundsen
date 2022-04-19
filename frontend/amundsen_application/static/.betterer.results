@@ -34,7 +34,7 @@ exports[`eslint`] = {
       [163, 6, 29, "Use object destructuring.", "2645724888"],
       [248, 6, 29, "Use object destructuring.", "2645724888"]
     ],
-    "js/components/Bookmark/MyBookmarks/index.tsx:1062745683": [
+    "js/components/Bookmark/MyBookmarks/index.tsx:838732531": [
       [34, 22, 22, "Must use destructuring props assignment", "351657334"],
       [53, 22, 22, "Must use destructuring props assignment", "351657334"],
       [85, 8, 19, "Must use destructuring props assignment", "2037903600"]
@@ -65,7 +65,7 @@ exports[`eslint`] = {
       [118, 19, 20, "Must use destructuring state assignment", "3067028466"],
       [126, 10, 137, "Visible, non-interactive elements with click handlers must have at least one keyboard listener.", "3965651236"]
     ],
-    "js/components/EditableText/index.tsx:2818784014": [
+    "js/components/EditableText/index.tsx:10602331": [
       [50, 2, 21, "textAreaRef should be placed after componentDidUpdate", "3072052035"],
       [71, 6, 13, "Do not use setState in componentDidUpdate", "57229240"],
       [79, 10, 25, "Must use destructuring props assignment", "793704523"],
@@ -188,17 +188,17 @@ exports[`eslint`] = {
       [130, 14, 17, "\'renderUserInfoSpy\' is assigned a value but never used.", "3779978186"],
       [148, 14, 17, "\'renderUserInfoSpy\' is assigned a value but never used.", "3779978186"]
     ],
-    "js/components/ResourceListItem/index.tsx:2873688266": [
-      [27, 15, 944, "Component should be written as a pure function", "951035964"],
-      [29, 12, 15, "Must use destructuring props assignment", "4222548600"],
-      [33, 23, 15, "Must use destructuring props assignment", "4222548600"],
-      [34, 21, 18, "Must use destructuring props assignment", "3823604846"],
-      [40, 21, 15, "Must use destructuring props assignment", "4222548600"],
-      [41, 21, 18, "Must use destructuring props assignment", "3823604846"],
-      [47, 19, 15, "Must use destructuring props assignment", "4222548600"],
-      [48, 21, 18, "Must use destructuring props assignment", "3823604846"],
-      [54, 18, 15, "Must use destructuring props assignment", "4222548600"],
-      [55, 21, 18, "Must use destructuring props assignment", "3823604846"]
+    "js/components/ResourceListItem/index.tsx:3699221539": [
+      [25, 15, 938, "Component should be written as a pure function", "2264091126"],
+      [27, 12, 15, "Must use destructuring props assignment", "4222548600"],
+      [31, 23, 15, "Must use destructuring props assignment", "4222548600"],
+      [32, 21, 18, "Must use destructuring props assignment", "3823604846"],
+      [38, 19, 15, "Must use destructuring props assignment", "4222548600"],
+      [39, 21, 18, "Must use destructuring props assignment", "3823604846"],
+      [45, 19, 15, "Must use destructuring props assignment", "4222548600"],
+      [46, 21, 18, "Must use destructuring props assignment", "3823604846"],
+      [52, 18, 15, "Must use destructuring props assignment", "4222548600"],
+      [53, 21, 18, "Must use destructuring props assignment", "3823604846"]
     ],
     "js/components/ScrollTracker/index.tsx:899536845": [
       [19, 2, 38, "throttledScroll should be placed after componentWillUnmount", "1421765304"],
@@ -235,7 +235,7 @@ exports[`eslint`] = {
       [85, 6, 25, "Use object destructuring.", "1501943800"],
       [86, 6, 29, "Use object destructuring.", "1935870456"]
     ],
-    "js/components/SearchBar/InlineSearchResults/SearchItemList/index.tsx:712009087": [
+    "js/components/SearchBar/InlineSearchResults/SearchItemList/index.tsx:2782848639": [
       [15, 0, 42, "\`../constants\` import should occur before import of \`./SearchItem\`", "3818422754"]
     ],
     "js/components/SearchBar/InlineSearchResults/SearchItemList/tests/index.spec.tsx:4250551755": [
@@ -255,7 +255,7 @@ exports[`eslint`] = {
       [170, 8, 29, "Use object destructuring.", "1935870456"],
       [192, 8, 25, "Use object destructuring.", "1230260048"]
     ],
-    "js/components/SearchBar/InlineSearchResults/index.tsx:1398520196": [
+    "js/components/SearchBar/InlineSearchResults/index.tsx:2651473717": [
       [31, 0, 46, "Dependency cycle detected.", "3506421300"],
       [84, 15, 21, "Must use destructuring props assignment", "1352381626"],
       [86, 15, 19, "Must use destructuring props assignment", "4761610"],
@@ -266,63 +266,63 @@ exports[`eslint`] = {
       [103, 15, 17, "Must use destructuring props assignment", "3767383680"],
       [105, 15, 16, "Must use destructuring props assignment", "1927755215"],
       [133, 8, 46, "Unexpected lexical declaration in case block.", "3160457975"],
-      [137, 8, 42, "Unexpected lexical declaration in case block.", "859680759"],
-      [140, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
-      [144, 8, 36, "Unexpected lexical declaration in case block.", "3331496983"],
+      [137, 8, 40, "Unexpected lexical declaration in case block.", "1046711677"],
+      [141, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
+      [145, 8, 36, "Unexpected lexical declaration in case block.", "3331496983"],
       [159, 8, 46, "Unexpected lexical declaration in case block.", "3160457975"],
-      [162, 8, 42, "Unexpected lexical declaration in case block.", "859680759"],
-      [169, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
-      [184, 8, 46, "Unexpected lexical declaration in case block.", "3160457975"],
-      [187, 8, 42, "Unexpected lexical declaration in case block.", "859680759"],
-      [190, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
-      [193, 8, 36, "Unexpected lexical declaration in case block.", "3331496983"],
-      [206, 8, 46, "Unexpected lexical declaration in case block.", "3160457975"],
-      [216, 8, 42, "Unexpected lexical declaration in case block.", "859680759"],
-      [223, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
-      [228, 8, 36, "Unexpected lexical declaration in case block.", "3331496983"],
-      [244, 8, 46, "Unexpected lexical declaration in case block.", "3160457975"],
-      [247, 8, 42, "Unexpected lexical declaration in case block.", "859680759"],
-      [254, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
-      [271, 24, 23, "Must use destructuring props assignment", "1919697041"],
-      [273, 22, 21, "Must use destructuring props assignment", "65539885"],
-      [283, 8, 20, "Must use destructuring props assignment", "2826313809"]
+      [162, 8, 40, "Unexpected lexical declaration in case block.", "1046711677"],
+      [165, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
+      [180, 8, 46, "Unexpected lexical declaration in case block.", "3160457975"],
+      [183, 8, 40, "Unexpected lexical declaration in case block.", "1046711677"],
+      [186, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
+      [189, 8, 36, "Unexpected lexical declaration in case block.", "3331496983"],
+      [202, 8, 46, "Unexpected lexical declaration in case block.", "3160457975"],
+      [212, 8, 40, "Unexpected lexical declaration in case block.", "1046711677"],
+      [219, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
+      [224, 8, 36, "Unexpected lexical declaration in case block.", "3331496983"],
+      [239, 8, 46, "Unexpected lexical declaration in case block.", "3160457975"],
+      [242, 8, 40, "Unexpected lexical declaration in case block.", "1046711677"],
+      [245, 8, 38, "Unexpected lexical declaration in case block.", "1782115575"],
+      [262, 24, 23, "Must use destructuring props assignment", "1919697041"],
+      [264, 22, 21, "Must use destructuring props assignment", "65539885"],
+      [274, 8, 20, "Must use destructuring props assignment", "2826313809"]
     ],
-    "js/components/SearchBar/InlineSearchResults/tests/index.spec.tsx:2744306554": [
-      [66, 6, 25, "Use object destructuring.", "1230260048"],
-      [87, 6, 25, "Use object destructuring.", "354229464"],
-      [88, 6, 29, "Use object destructuring.", "2645724888"],
-      [115, 6, 25, "Use object destructuring.", "354229464"],
-      [116, 6, 29, "Use object destructuring.", "2645724888"],
-      [154, 6, 25, "Use object destructuring.", "354229464"],
-      [154, 6, 5, "\'props\' is assigned a value but never used.", "187023499"],
-      [155, 6, 29, "Use object destructuring.", "2645724888"],
-      [244, 6, 25, "Use object destructuring.", "354229464"],
-      [245, 6, 29, "Use object destructuring.", "2645724888"],
-      [290, 6, 25, "Use object destructuring.", "354229464"],
-      [291, 6, 29, "Use object destructuring.", "2645724888"],
-      [296, 12, 44, "Use array destructuring.", "2292708154"],
-      [309, 12, 36, "Use array destructuring.", "868044730"],
-      [338, 6, 25, "Use object destructuring.", "354229464"],
-      [339, 6, 29, "Use object destructuring.", "2645724888"],
-      [342, 12, 44, "Use array destructuring.", "2292708154"],
-      [349, 12, 36, "Use array destructuring.", "868044730"],
-      [356, 12, 34, "Use array destructuring.", "2111643962"],
-      [376, 6, 25, "Use object destructuring.", "354229464"],
-      [377, 6, 29, "Use object destructuring.", "2645724888"],
-      [380, 12, 44, "Use array destructuring.", "2292708154"],
-      [391, 12, 36, "Use array destructuring.", "868044730"],
-      [400, 12, 34, "Use array destructuring.", "2111643962"],
-      [419, 6, 25, "Use object destructuring.", "354229464"],
-      [420, 6, 29, "Use object destructuring.", "2645724888"],
-      [425, 12, 44, "Use array destructuring.", "2292708154"],
-      [438, 12, 36, "Use array destructuring.", "868044730"],
-      [474, 8, 25, "Use object destructuring.", "354229464"],
-      [475, 8, 29, "Use object destructuring.", "2645724888"],
-      [503, 8, 25, "Use object destructuring.", "354229464"],
-      [504, 8, 29, "Use object destructuring.", "2645724888"],
-      [572, 6, 25, "Use object destructuring.", "1230260048"],
-      [622, 6, 25, "Use object destructuring.", "354229464"],
-      [623, 6, 29, "Use object destructuring.", "2645724888"]
+    "js/components/SearchBar/InlineSearchResults/tests/index.spec.tsx:2955142754": [
+      [65, 6, 25, "Use object destructuring.", "1230260048"],
+      [86, 6, 25, "Use object destructuring.", "354229464"],
+      [87, 6, 29, "Use object destructuring.", "2645724888"],
+      [114, 6, 25, "Use object destructuring.", "354229464"],
+      [115, 6, 29, "Use object destructuring.", "2645724888"],
+      [153, 6, 25, "Use object destructuring.", "354229464"],
+      [153, 6, 5, "\'props\' is assigned a value but never used.", "187023499"],
+      [154, 6, 29, "Use object destructuring.", "2645724888"],
+      [243, 6, 25, "Use object destructuring.", "354229464"],
+      [244, 6, 29, "Use object destructuring.", "2645724888"],
+      [289, 6, 25, "Use object destructuring.", "354229464"],
+      [290, 6, 29, "Use object destructuring.", "2645724888"],
+      [295, 12, 44, "Use array destructuring.", "2292708154"],
+      [308, 12, 36, "Use array destructuring.", "868044730"],
+      [337, 6, 25, "Use object destructuring.", "354229464"],
+      [338, 6, 29, "Use object destructuring.", "2645724888"],
+      [341, 12, 44, "Use array destructuring.", "2292708154"],
+      [348, 12, 36, "Use array destructuring.", "868044730"],
+      [355, 12, 34, "Use array destructuring.", "2111643962"],
+      [375, 6, 25, "Use object destructuring.", "354229464"],
+      [376, 6, 29, "Use object destructuring.", "2645724888"],
+      [379, 12, 44, "Use array destructuring.", "2292708154"],
+      [390, 12, 36, "Use array destructuring.", "868044730"],
+      [399, 12, 34, "Use array destructuring.", "2111643962"],
+      [418, 6, 25, "Use object destructuring.", "354229464"],
+      [419, 6, 29, "Use object destructuring.", "2645724888"],
+      [424, 12, 44, "Use array destructuring.", "2292708154"],
+      [437, 12, 36, "Use array destructuring.", "868044730"],
+      [473, 8, 25, "Use object destructuring.", "354229464"],
+      [474, 8, 29, "Use object destructuring.", "2645724888"],
+      [502, 8, 25, "Use object destructuring.", "354229464"],
+      [503, 8, 29, "Use object destructuring.", "2645724888"],
+      [571, 6, 25, "Use object destructuring.", "1230260048"],
+      [621, 6, 25, "Use object destructuring.", "354229464"],
+      [622, 6, 29, "Use object destructuring.", "2645724888"]
     ],
     "js/components/SearchBar/index.spec.tsx:3541693335": [
       [49, 6, 39, "Use object destructuring.", "1991804342"],
@@ -622,13 +622,13 @@ exports[`eslint`] = {
       [97, 6, 29, "Use object destructuring.", "2645724888"],
       [104, 6, 19, "\'featureOptionConfig\' is assigned a value but never used.", "2233467640"]
     ],
-    "js/pages/SearchPage/ResourceSelector/index.tsx:4162192754": [
+    "js/pages/SearchPage/ResourceSelector/index.tsx:4131569266": [
       [54, 4, 22, "Must use destructuring props assignment", "3282194885"],
       [65, 19, 19, "Must use destructuring props assignment", "3960624135"],
       [85, 15, 17, "Must use destructuring props assignment", "3767383680"],
-      [93, 15, 21, "Must use destructuring props assignment", "1352381626"],
-      [101, 15, 16, "Must use destructuring props assignment", "1927755215"],
-      [109, 15, 19, "Must use destructuring props assignment", "4761610"]
+      [93, 15, 19, "Must use destructuring props assignment", "4761610"],
+      [101, 15, 21, "Must use destructuring props assignment", "1352381626"],
+      [109, 15, 16, "Must use destructuring props assignment", "1927755215"]
     ],
     "js/pages/SearchPage/SearchFilter/InputFilter/index.tsx:2399701553": [
       [70, 6, 13, "Do not use setState in componentDidUpdate", "57229240"]
@@ -708,11 +708,11 @@ exports[`eslint`] = {
     "js/pages/TableDetailPage/index.spec.tsx:1320221888": [
       [64, 6, 25, "Use object destructuring.", "1230260048"]
     ],
-    "js/pages/TableDetailPage/index.tsx:2696952062": [
-      [147, 2, 20, "key should be placed after componentDidUpdate", "3916788587"],
-      [189, 6, 13, "Do not use setState in componentDidUpdate", "57229240"]
+    "js/pages/TableDetailPage/index.tsx:3900807020": [
+      [148, 2, 20, "key should be placed after componentDidUpdate", "3916788587"],
+      [190, 6, 13, "Do not use setState in componentDidUpdate", "57229240"]
     ],
-    "js/utils/textUtils.ts:2545492889": [
+    "js/utils/textUtils.ts:1724810778": [
       [19, 6, 46, "Unexpected lexical declaration in case block.", "156477898"]
     ]
   }`

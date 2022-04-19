@@ -7,14 +7,12 @@ import {
   Resource,
   ResourceType,
   DashboardResource,
-  FeatureResource,
   TableResource,
   UserResource,
 } from 'interfaces';
 
 import { LoggingParams } from './types';
 import DashboardListItem from './DashboardListItem';
-import FeatureListItem from './FeatureListItem';
 import TableListItem from './TableListItem';
 import UserListItem from './UserListItem';
 
@@ -37,8 +35,8 @@ export default class ResourceListItem extends React.Component<ListItemProps> {
         );
       case ResourceType.feature:
         return (
-          <FeatureListItem
-            feature={this.props.item as FeatureResource}
+          <TableListItem
+            table={this.props.item as TableResource}
             logging={this.props.logging}
           />
         );
