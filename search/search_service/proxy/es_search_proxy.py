@@ -85,7 +85,7 @@ class ElasticsearchProxy():
     RESOUCE_TO_MAPPING = {
         Resource.TABLE: TABLE_MAPPING,
         Resource.DASHBOARD: DASHBOARD_MAPPING,
-        Resource.FEATURE: FEATURE_MAPPING,
+        Resource.FEATURE: TABLE_MAPPING,
         Resource.USER: USER_MAPPING,
     }
 
@@ -158,7 +158,7 @@ class ElasticsearchProxy():
         must_fields_mapping = {
             Resource.TABLE: self.MUST_FIELDS_TABLE,
             Resource.DASHBOARD: self.MUST_FIELDS_DASHBOARD,
-            Resource.FEATURE: self.MUST_FIELDS_FEATURE,
+            Resource.FEATURE: self.MUST_FIELDS_TABLE,
             Resource.USER: self.MUST_FIELDS_USER
         }
 

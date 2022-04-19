@@ -389,7 +389,7 @@ RESPONSE_2 = [
         },
         "hits": {
             "total": {
-                "value": 3,
+                "value": 2,
                 "relation": "eq"
             },
             "max_score": 62.66787,
@@ -400,18 +400,37 @@ RESPONSE_2 = [
                     "_id": "mock_feat_id",
                     "_score": 62.66787,
                     "_source": {
-                        "availability": None,
-                        "badges": [],
-                        "description": "mock feature description",
-                        "entity": None,
-                        "feature_group": "fg_2",
-                        "feature_name": "feature_1",
-                        "key": "none/feature_1/1",
-                        "last_updated_timestamp": 1525208316,
-                        "status": "active",
-                        "tags": [],
-                        "total_usage": 0,
-                        "version": 1,
+                        "badges": [
+                            "pii",
+                            "beta"
+                        ],
+                        "cluster": "mock_cluster",
+                        "column_descriptions": [
+                            "mock_col_desc_1",
+                            "mock_col_desc_2",
+                            "mock_col_desc_3"
+                        ],
+                        "column_names": [
+                            "mock_col_1",
+                            "mock_col_2",
+                            "mock_col_3"
+                        ],
+                        "database": "mock_db",
+                        "description": "mock table description",
+                        "display_name": "mock_schema.mock_table_1",
+                        "key": "mock_db://mock_cluster.mock_schema/mock_table_1",
+                        "last_updated_timestamp": 1635831717,
+                        "name": "mock_table_1",
+                        "programmatic_descriptions": [],
+                        "schema": "mock_schema",
+                        "schema_description": None,
+                        "tags": [
+                            "mock_tag_1",
+                            "mock_tag_2",
+                            "mock_tag_3"
+                        ],
+                        "total_usage": 74841,
+                        "unique_usage": 457,
                         "resource_type": "feature"
                     }
                 },
@@ -421,41 +440,34 @@ RESPONSE_2 = [
                     "_id": "mock_feat_id_2",
                     "_score": 62.66787,
                     "_source": {
-                        "availability": None,
                         "badges": [],
-                        "description": "mock feature description",
-                        "entity": None,
-                        "feature_group": "fg_2",
-                        "feature_name": "feature_2",
-                        "key": "fg_2/feature_2/1",
-                        "last_updated_timestamp": 1525208316,
-                        "status": "active",
-                        "tags": [],
-                        "total_usage": 10,
-                        "version": 1,
-                        "resource_type": "feature"
-                    }
-                },
-                {
-                    "_index": "feature_search_index",
-                    "_type": "feature",
-                    "_id": "mock_feat_id_3",
-                    "_score": 62.66787,
-                    "_source": {
-                        "availability": None,
-                        "badges": [
-                            "pii"
+                        "cluster": "mock_cluster",
+                        "column_descriptions": [
+                            "mock_col_desc_1",
+                            "mock_col_desc_2",
+                            "mock_col_desc_3"
                         ],
-                        "description": "mock feature description",
-                        "entity": None,
-                        "feature_group": "fg_3",
-                        "feature_name": "feature_3",
-                        "key": "fg_3/feature_3/2",
-                        "last_updated_timestamp": 1525208316,
-                        "status": "active",
-                        "tags": [],
-                        "total_usage": 3,
-                        "version": 2,
+                        "column_names": [
+                            "mock_col_1",
+                            "mock_col_2",
+                            "mock_col_3"
+                        ],
+                        "database": "mock_db",
+                        "description": "mock table description",
+                        "display_name": "mock_schema.mock_table_2",
+                        "key": "mock_db://mock_cluster.mock_schema/mock_table_2",
+                        "last_updated_timestamp": 1635831717,
+                        "name": "mock_table_2",
+                        "programmatic_descriptions": [],
+                        "schema": "mock_schema",
+                        "schema_description": None,
+                        "tags": [
+                            "mock_tag_4",
+                            "mock_tag_5",
+                            "mock_tag_6"
+                        ],
+                        "total_usage": 4715,
+                        "unique_usage": 254,
                         "resource_type": "feature"
                     }
                 }
