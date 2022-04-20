@@ -51,13 +51,15 @@ export class TableHeaderBullets extends React.Component<TableHeaderBulletsProps>
           <li>{getDisplayNameByResource(ResourceType.feature)}</li>
         )}
         {database !== 'feature' && (
-          <li>{getDisplayNameByResource(ResourceType.table)}</li>
+          <>
+            <li>{getDisplayNameByResource(ResourceType.table)}</li>
+            <li>
+              <Link to="/search" onClick={this.handleClick}>
+                {getSourceDisplayName(database || '', ResourceType.table)}
+              </Link>
+            </li>
+          </>
         )}
-        <li>
-          <Link to="/search" onClick={this.handleClick}>
-            {getSourceDisplayName(database || '', ResourceType.table)}
-          </Link>
-        </li>
         <li>{cluster || ''}</li>
         {isViewCheck && <li>{TABLE_VIEW_TEXT}</li>}
       </ul>
