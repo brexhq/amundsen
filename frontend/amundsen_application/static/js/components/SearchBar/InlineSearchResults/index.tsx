@@ -278,10 +278,10 @@ export class InlineSearchResults extends React.Component<
     return (
       <>
         {this.renderResultsByResource(ResourceType.table)}
-        {indexDashboardsEnabled() &&
-          this.renderResultsByResource(ResourceType.dashboard)}
         {indexFeaturesEnabled() &&
           this.renderResultsByResource(ResourceType.feature)}
+        {indexDashboardsEnabled() &&
+          this.renderResultsByResource(ResourceType.dashboard)}
         {indexUsersEnabled() && this.renderResultsByResource(ResourceType.user)}
       </>
     );
