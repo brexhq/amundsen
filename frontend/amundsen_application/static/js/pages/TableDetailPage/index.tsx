@@ -63,6 +63,7 @@ import {
   SortCriteria,
   Lineage,
   TableApp,
+  TableSource,
 } from 'interfaces';
 
 import DataPreviewButton from './DataPreviewButton';
@@ -368,10 +369,26 @@ export class TableDetail extends React.Component<
     const databricksApps = apps.filter(
       (app) => app.name.toLowerCase() === DATABRICKS.toLowerCase()
     );
+    // <Brex>
+    const planGithubApps: TableSource[] = apps
+      .filter((app) => app.name.toLowerCase() === 'plan')
+      .map((app) => ({ source: app.application_url, source_type: app.name }));
+    const featureLinkApps: TableSource[] = apps
+      .filter((app) => app.name.toLowerCase() === 'feature_link')
+      .map((app) => ({ source: app.application_url, source_type: app.name }));
+    const tableLinkApps: TableSource[] = apps
+      .filter((app) => app.name.toLowerCase() === 'table_link')
+      .map((app) => ({ source: app.application_url, source_type: app.name }));
+    // </Brex>
     const remainingApps = apps.filter(
       (app) =>
         app.name.toLowerCase() !== AIRFLOW.toLowerCase() &&
-        app.name.toLowerCase() !== DATABRICKS.toLowerCase()
+        app.name.toLowerCase() !== DATABRICKS.toLowerCase() &&
+        // <Brex>
+        app.name.toLowerCase() !== 'plan' &&
+        app.name.toLowerCase() !== 'feature_link' &&
+        app.name.toLowerCase() !== 'table_link'
+      // </Brex>
     );
 
     return (
@@ -385,6 +402,20 @@ export class TableDetail extends React.Component<
         {remainingApps.length > 0 && (
           <ApplicationDropdown tableApps={remainingApps} />
         )}
+        {/* Brex */}
+        {planGithubApps.length > 0 &&
+          planGithubApps.map((tableSource) => (
+            <SourceLink tableSource={tableSource} />
+          ))}
+        {featureLinkApps.length > 0 &&
+          featureLinkApps.map((tableSource) => (
+            <SourceLink tableSource={tableSource} />
+          ))}
+        {tableLinkApps.length > 0 &&
+          tableLinkApps.map((tableSource) => (
+            <SourceLink tableSource={tableSource} />
+          ))}
+        {/* /Brex */}
       </div>
     );
   }
@@ -468,8 +499,8 @@ export class TableDetail extends React.Component<
             </div>
             <div className="header-section header-links header-external-links">
               {this.renderTableAppDropdowns(data.table_writer, data.table_apps)}
-              <LineageLink tableData={data} />
               <SourceLink tableSource={data.source} />
+              <LineageLink tableData={data} />
             </div>
             <div className="header-section header-buttons">
               <TableReportsDropdown resourceReports={data.resource_reports} />
