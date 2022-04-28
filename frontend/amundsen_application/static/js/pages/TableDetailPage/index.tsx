@@ -376,8 +376,11 @@ export class TableDetail extends React.Component<
     const featureLinkApps: TableSource[] = apps
       .filter((app) => app.name.toLowerCase() === 'feature_link')
       .map((app) => ({ source: app.application_url, source_type: app.name }));
-    const tableLinkApps: TableSource[] = apps
-      .filter((app) => app.name.toLowerCase() === 'table_link')
+    const snowflakeLinkApps: TableSource[] = apps
+      .filter((app) => app.name.toLowerCase() === 'snowflake_link')
+      .map((app) => ({ source: app.application_url, source_type: app.name }));
+    const postgresLinkApps: TableSource[] = apps
+      .filter((app) => app.name.toLowerCase() === 'postgres_link')
       .map((app) => ({ source: app.application_url, source_type: app.name }));
     // </Brex>
     const remainingApps = apps.filter(
@@ -387,7 +390,8 @@ export class TableDetail extends React.Component<
         // <Brex>
         app.name.toLowerCase() !== 'plan' &&
         app.name.toLowerCase() !== 'feature_link' &&
-        app.name.toLowerCase() !== 'table_link'
+        app.name.toLowerCase() !== 'snowflake_link' &&
+        app.name.toLowerCase() !== 'postgres_link'
       // </Brex>
     );
 
@@ -411,8 +415,12 @@ export class TableDetail extends React.Component<
           featureLinkApps.map((tableSource) => (
             <SourceLink tableSource={tableSource} />
           ))}
-        {tableLinkApps.length > 0 &&
-          tableLinkApps.map((tableSource) => (
+        {snowflakeLinkApps.length > 0 &&
+          snowflakeLinkApps.map((tableSource) => (
+            <SourceLink tableSource={tableSource} />
+          ))}
+        {postgresLinkApps.length > 0 &&
+          postgresLinkApps.map((tableSource) => (
             <SourceLink tableSource={tableSource} />
           ))}
         {/* /Brex */}
