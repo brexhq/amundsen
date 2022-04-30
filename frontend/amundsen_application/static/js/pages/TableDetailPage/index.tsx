@@ -370,9 +370,6 @@ export class TableDetail extends React.Component<
       (app) => app.name.toLowerCase() === DATABRICKS.toLowerCase()
     );
     // <Brex>
-    const planGithubApps: TableSource[] = apps
-      .filter((app) => app.name.toLowerCase() === 'plan')
-      .map((app) => ({ source: app.application_url, source_type: app.name }));
     const featureLinkApps: TableSource[] = apps
       .filter((app) => app.name.toLowerCase() === 'feature_link')
       .map((app) => ({ source: app.application_url, source_type: app.name }));
@@ -382,16 +379,19 @@ export class TableDetail extends React.Component<
     const postgresLinkApps: TableSource[] = apps
       .filter((app) => app.name.toLowerCase() === 'postgres_link')
       .map((app) => ({ source: app.application_url, source_type: app.name }));
+    const planGithubApps: TableSource[] = apps
+      .filter((app) => app.name.toLowerCase() === 'plan')
+      .map((app) => ({ source: app.application_url, source_type: app.name }));
     // </Brex>
     const remainingApps = apps.filter(
       (app) =>
         app.name.toLowerCase() !== AIRFLOW.toLowerCase() &&
         app.name.toLowerCase() !== DATABRICKS.toLowerCase() &&
         // <Brex>
-        app.name.toLowerCase() !== 'plan' &&
         app.name.toLowerCase() !== 'feature_link' &&
         app.name.toLowerCase() !== 'snowflake_link' &&
-        app.name.toLowerCase() !== 'postgres_link'
+        app.name.toLowerCase() !== 'postgres_link' &&
+        app.name.toLowerCase() !== 'plan'
       // </Brex>
     );
 
@@ -407,10 +407,6 @@ export class TableDetail extends React.Component<
           <ApplicationDropdown tableApps={remainingApps} />
         )}
         {/* Brex */}
-        {planGithubApps.length > 0 &&
-          planGithubApps.map((tableSource) => (
-            <SourceLink tableSource={tableSource} />
-          ))}
         {featureLinkApps.length > 0 &&
           featureLinkApps.map((tableSource) => (
             <SourceLink tableSource={tableSource} />
@@ -421,6 +417,10 @@ export class TableDetail extends React.Component<
           ))}
         {postgresLinkApps.length > 0 &&
           postgresLinkApps.map((tableSource) => (
+            <SourceLink tableSource={tableSource} />
+          ))}
+        {planGithubApps.length > 0 &&
+          planGithubApps.map((tableSource) => (
             <SourceLink tableSource={tableSource} />
           ))}
         {/* /Brex */}
