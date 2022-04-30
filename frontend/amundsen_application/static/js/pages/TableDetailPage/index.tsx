@@ -396,7 +396,7 @@ export class TableDetail extends React.Component<
     );
 
     return (
-      <div>
+      <>
         {airflowApps.length > 0 && (
           <ApplicationDropdown tableApps={airflowApps} />
         )}
@@ -424,7 +424,7 @@ export class TableDetail extends React.Component<
             <SourceLink tableSource={tableSource} />
           ))}
         {/* /Brex */}
-      </div>
+      </>
     );
   }
 
