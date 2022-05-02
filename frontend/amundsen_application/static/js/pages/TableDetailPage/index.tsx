@@ -63,7 +63,6 @@ import {
   SortCriteria,
   Lineage,
   TableApp,
-  TableSource,
 } from 'interfaces';
 
 import DataPreviewButton from './DataPreviewButton';
