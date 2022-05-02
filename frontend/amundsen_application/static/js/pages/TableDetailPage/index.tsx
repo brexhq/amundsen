@@ -370,28 +370,19 @@ export class TableDetail extends React.Component<
       (app) => app.name.toLowerCase() === DATABRICKS.toLowerCase()
     );
     // <Brex>
-    const featureLinkApps: TableSource[] = apps
-      .filter((app) => app.name.toLowerCase() === 'feature_link')
-      .map((app) => ({ source: app.application_url, source_type: app.name }));
-    const snowflakeLinkApps: TableSource[] = apps
-      .filter((app) => app.name.toLowerCase() === 'snowflake_link')
-      .map((app) => ({ source: app.application_url, source_type: app.name }));
-    const postgresLinkApps: TableSource[] = apps
-      .filter((app) => app.name.toLowerCase() === 'postgres_link')
-      .map((app) => ({ source: app.application_url, source_type: app.name }));
-    const planGithubApps: TableSource[] = apps
-      .filter((app) => app.name.toLowerCase() === 'plan')
-      .map((app) => ({ source: app.application_url, source_type: app.name }));
+    const customApplications = [
+      'feature_link',
+      'snowflake_link',
+      'postgres_link',
+      'plan',
+    ];
     // </Brex>
     const remainingApps = apps.filter(
       (app) =>
         app.name.toLowerCase() !== AIRFLOW.toLowerCase() &&
         app.name.toLowerCase() !== DATABRICKS.toLowerCase() &&
         // <Brex>
-        app.name.toLowerCase() !== 'feature_link' &&
-        app.name.toLowerCase() !== 'snowflake_link' &&
-        app.name.toLowerCase() !== 'postgres_link' &&
-        app.name.toLowerCase() !== 'plan'
+        customApplications.indexOf(app.name.toLowerCase()) === -1
       // </Brex>
     );
 
@@ -407,22 +398,17 @@ export class TableDetail extends React.Component<
           <ApplicationDropdown tableApps={remainingApps} />
         )}
         {/* Brex */}
-        {featureLinkApps.length > 0 &&
-          featureLinkApps.map((tableSource) => (
-            <SourceLink tableSource={tableSource} />
-          ))}
-        {snowflakeLinkApps.length > 0 &&
-          snowflakeLinkApps.map((tableSource) => (
-            <SourceLink tableSource={tableSource} />
-          ))}
-        {postgresLinkApps.length > 0 &&
-          postgresLinkApps.map((tableSource) => (
-            <SourceLink tableSource={tableSource} />
-          ))}
-        {planGithubApps.length > 0 &&
-          planGithubApps.map((tableSource) => (
-            <SourceLink tableSource={tableSource} />
-          ))}
+        {customApplications.map((application) =>
+          apps
+            .filter(
+              (app) => app.name.toLowerCase() === application.toLowerCase()
+            )
+            .map((app) => ({
+              source: app.application_url,
+              source_type: app.name,
+            }))
+            .map((tableSource) => <SourceLink tableSource={tableSource} />)
+        )}
         {/* /Brex */}
       </>
     );
