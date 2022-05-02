@@ -512,8 +512,12 @@ export class TableDetail extends React.Component<
             </div>
             <div className="header-section header-buttons">
               <TableReportsDropdown resourceReports={data.resource_reports} />
-              <DataFreshnessButton modalTitle={this.getDisplayName()} />
-              <DataPreviewButton modalTitle={this.getDisplayName()} />
+              {data.database !== 'feature' && (
+                <>
+                  <DataFreshnessButton modalTitle={this.getDisplayName()} />
+                  <DataPreviewButton modalTitle={this.getDisplayName()} />
+                </>
+              )}
               <ExploreButton tableData={data} />
             </div>
           </header>
