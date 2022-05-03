@@ -368,14 +368,25 @@ export class TableDetail extends React.Component<
     const databricksApps = apps.filter(
       (app) => app.name.toLowerCase() === DATABRICKS.toLowerCase()
     );
+    // <Brex>
+    const customApplications = [
+      'feature_link',
+      'snowflake_link',
+      'postgres_link',
+      'plan',
+    ];
+    // </Brex>
     const remainingApps = apps.filter(
       (app) =>
         app.name.toLowerCase() !== AIRFLOW.toLowerCase() &&
-        app.name.toLowerCase() !== DATABRICKS.toLowerCase()
+        app.name.toLowerCase() !== DATABRICKS.toLowerCase() &&
+        // <Brex>
+        customApplications.indexOf(app.name.toLowerCase()) === -1
+      // </Brex>
     );
 
     return (
-      <div>
+      <>
         {airflowApps.length > 0 && (
           <ApplicationDropdown tableApps={airflowApps} />
         )}
@@ -385,7 +396,20 @@ export class TableDetail extends React.Component<
         {remainingApps.length > 0 && (
           <ApplicationDropdown tableApps={remainingApps} />
         )}
-      </div>
+        {/* Brex */}
+        {customApplications.map((application) =>
+          apps
+            .filter(
+              (app) => app.name.toLowerCase() === application.toLowerCase()
+            )
+            .map((app) => ({
+              source: app.application_url,
+              source_type: app.name,
+            }))
+            .map((tableSource) => <SourceLink tableSource={tableSource} />)
+        )}
+        {/* /Brex */}
+      </>
     );
   }
 
@@ -468,13 +492,17 @@ export class TableDetail extends React.Component<
             </div>
             <div className="header-section header-links header-external-links">
               {this.renderTableAppDropdowns(data.table_writer, data.table_apps)}
-              <LineageLink tableData={data} />
               <SourceLink tableSource={data.source} />
+              <LineageLink tableData={data} />
             </div>
             <div className="header-section header-buttons">
               <TableReportsDropdown resourceReports={data.resource_reports} />
-              <DataFreshnessButton modalTitle={this.getDisplayName()} />
-              <DataPreviewButton modalTitle={this.getDisplayName()} />
+              {data.database !== 'feature' && (
+                <>
+                  <DataFreshnessButton modalTitle={this.getDisplayName()} />
+                  <DataPreviewButton modalTitle={this.getDisplayName()} />
+                </>
+              )}
               <ExploreButton tableData={data} />
             </div>
           </header>
