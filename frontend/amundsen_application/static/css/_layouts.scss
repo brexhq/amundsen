@@ -26,6 +26,8 @@ $icon-header-size: 32px;
     }
 
     .header-section {
+      flex-shrink: 0;
+
       &.header-title {
         flex-grow: 1;
 
