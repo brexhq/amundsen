@@ -11,7 +11,6 @@ import AirflowMenu from './AirflowMenu';
 import DatabricksMenu from './DatabricksMenu';
 import GenericMenu from './GenericMenu';
 import {
-  APPLICATIONS_LABEL,
   AIRFLOW,
   DATABRICKS,
   PRODUCING,
