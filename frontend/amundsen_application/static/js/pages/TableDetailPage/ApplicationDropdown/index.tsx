@@ -11,7 +11,6 @@ import AirflowMenu from './AirflowMenu';
 import DatabricksMenu from './DatabricksMenu';
 import GenericMenu from './GenericMenu';
 import {
-  APPLICATIONS_LABEL,
   AIRFLOW,
   DATABRICKS,
   PRODUCING,
@@ -32,6 +31,14 @@ const getImagePath = (tableAppName) => {
       return AIRFLOW_LOGO_PATH;
     case DATABRICKS.toLowerCase():
       return DATABRICKS_LOGO_PATH;
+    case 'feature_link':
+      return '/static/images/icons/Database.svg';
+    case 'snowflake_link':
+      return '/static/images/icons/logo-snowflake.svg';
+    case 'postgres_link':
+      return '/static/images/icons/logo-postgres.svg';
+    case 'plan':
+      return '/static/images/github.png';
     default:
       return GENERIC_APP_LOGO_PATH;
   }
@@ -123,7 +130,11 @@ const ApplicationDropdown: React.FC<ApplicationDropdownProps> = ({
   const image = getImagePath(tableApps[0].name.toLowerCase());
   const avatarLabel = isAirflowOrDatabricksApp(tableApps[0].name)
     ? tableApps[0].name
-    : APPLICATIONS_LABEL;
+    : (
+        tableApps[0].name.charAt(0).toUpperCase() + tableApps[0].name.slice(1)
+      ).replace('_link', '');
+  // customize the avatalLabel,
+  // snowflake_link -> Snowflake, postgres_link -> Postgres, feature_link -> Feature, plan -> Plan
 
   return (
     <Dropdown

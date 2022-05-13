@@ -397,17 +397,13 @@ export class TableDetail extends React.Component<
           <ApplicationDropdown tableApps={remainingApps} />
         )}
         {/* Brex */}
-        {customApplications.map((application) =>
-          apps
-            .filter(
+        {customApplications.map((application) => (
+          <ApplicationDropdown
+            tableApps={apps.filter(
               (app) => app.name.toLowerCase() === application.toLowerCase()
-            )
-            .map((app) => ({
-              source: app.application_url,
-              source_type: app.name,
-            }))
-            .map((tableSource) => <SourceLink tableSource={tableSource} />)
-        )}
+            )}
+          />
+        ))}
         {/* /Brex */}
       </>
     );
